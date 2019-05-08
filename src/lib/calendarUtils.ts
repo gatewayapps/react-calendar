@@ -11,5 +11,5 @@ export function getCalendarEndDate(
   weekStartsOn: DayOfWeek = DayOfWeek.Sunday
 ): Date {
   const startDate = getCalendarStartDate(date, weekStartsOn)
-  return startOfDay(endOfWeek(addWeeks(startDate, numberOfWeeks - 1)))
+  return startOfDay(endOfWeek(addWeeks(startDate, numberOfWeeks - 1), { weekStartsOn }))
 }

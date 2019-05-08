@@ -41,4 +41,16 @@ describe('getCalendarEndDate', () => {
   it('Should return 4/27/2019 when date is 4/15/2019 and number of weeks is 4', () => {
     expect(getCalendarEndDate(new Date(2019, 3, 15), 4)).toEqual(new Date(2019, 3, 27))
   })
+
+  it('Should return 5/12/2019 when date is 4/15/2019 and number of weeks is 6 and week starts on Monday', () => {
+    expect(getCalendarEndDate(new Date(2019, 3, 15), 6, DayOfWeek.Monday)).toEqual(
+      new Date(2019, 4, 12)
+    )
+  })
+
+  it('Should return 4/22/2019 when date is 4/15/2019 and number of weeks is 4 and week starts on Monday', () => {
+    expect(getCalendarEndDate(new Date(2019, 3, 15), 4, DayOfWeek.Monday)).toEqual(
+      new Date(2019, 3, 28)
+    )
+  })
 })
