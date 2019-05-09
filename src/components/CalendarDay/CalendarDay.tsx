@@ -1,3 +1,4 @@
+import cn from 'classnames'
 import { isSameMonth, isToday } from 'date-fns'
 import * as React from 'react'
 import { DayContainer, DayHeader, EventsContainer } from './CalendarDay.styled'
@@ -10,8 +11,14 @@ interface ICalendarDayProps {
 }
 
 const CalendarDay: React.FunctionComponent<ICalendarDayProps> = (props) => {
+  const dayClasses = cn({
+    firstDayOfWeek: props.column === 1,
+    lastDayOfWeek: props.column === 7
+  })
+
   return (
     <DayContainer
+      className={dayClasses}
       isCurrentMonth={isSameMonth(props.currentMonth, props.date)}
       isToday={isToday(props.date)}
       row={props.row}

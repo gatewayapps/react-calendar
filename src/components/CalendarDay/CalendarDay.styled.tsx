@@ -27,6 +27,14 @@ export const DayContainer = styled.div<IDayContainerProps>`
   /* IE 11 Support */
   -ms-grid-row: ${(props) => props.row};
   -ms-grid-column: ${(props) => props.column};
+
+  &:not(.firstDayOfWeek) {
+    border-left-width: 0.5px;
+  }
+
+  &:not(.lastDayOfWeek) {
+    border-right-width: 0.5px;
+  }
 `
 
 export const DayHeader = styled.div`
@@ -34,6 +42,7 @@ export const DayHeader = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.calendarDay.borderColor};
   font-size: 0.85em;
   font-weight: bold;
+  padding: 0 0.5em;
 `
 
 export const EventsContainer = styled.div`
