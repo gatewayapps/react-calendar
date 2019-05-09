@@ -1,7 +1,6 @@
 import { storiesOf } from '@storybook/react'
 import React from 'react'
-import Calendar from '../src/components/Calendar'
-import { DayOfWeek } from '../src/lib/DayOfWeek'
+import { Calendar, DayOfWeek } from '../src'
 
 storiesOf('Calendar', module)
   .add('Default', () => (

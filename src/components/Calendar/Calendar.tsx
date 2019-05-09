@@ -1,12 +1,12 @@
 import { startOfMonth } from 'date-fns'
 import React, { useState } from 'react'
-import { DEFAULT_NUMBER_OF_WEEKS, DEFAULT_WEEK_STARTS_ON } from '../../constants'
+import { DEFAULT_NUMBER_OF_WEEKS, DEFAULT_WEEK_STARTS_ON } from '../../lib/constants'
 import { DayOfWeek } from '../../lib/DayOfWeek'
 import { ThemeProvider } from '../../styles/styled-components'
 import { defaultTheme } from '../../styles/theme'
-import CalendarBody from '../CalendarBody'
-import CalendarHeader from '../CalendarHeader'
+import Body from './Body'
 import { CalendarContainer } from './Calendar.styled'
+import Header from './Header'
 
 export interface ICalendarProps {
   defaultDate?: Date
@@ -20,8 +20,8 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps
   return (
     <ThemeProvider theme={defaultTheme}>
       <CalendarContainer>
-        <CalendarHeader currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
-        <CalendarBody
+        <Header currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
+        <Body
           currentMonth={currentMonth}
           numberOfWeeks={DEFAULT_NUMBER_OF_WEEKS}
           weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}

@@ -1,13 +1,13 @@
 import { addMonths, format, subMonths } from 'date-fns'
 import * as React from 'react'
-import { HeaderContainer, Title } from './CalendarHeader.styled'
+import { HeaderContainer, Title } from './Header.styled'
 
-interface ICalendarHeaderProps {
+interface IHeaderProps {
   currentMonth: Date
   setCurrentMonth: (date: Date) => void
 }
 
-const CalendarHeader: React.FunctionComponent<ICalendarHeaderProps> = (props) => {
+const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   return (
     <HeaderContainer>
       <Title>{format(props.currentMonth, 'MMMM YYYY')}</Title>
@@ -23,4 +23,4 @@ const CalendarHeader: React.FunctionComponent<ICalendarHeaderProps> = (props) =>
   )
 }
 
-export default CalendarHeader
+export default Header

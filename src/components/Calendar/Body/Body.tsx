@@ -1,17 +1,17 @@
 import { eachDay, format } from 'date-fns'
 import * as React from 'react'
-import { getCalendarEndDate, getCalendarStartDate } from '../../lib/calendarUtils'
-import { DayOfWeek } from '../../lib/DayOfWeek'
-import CalendarDay from '../CalendarDay'
-import { BodyContainer, WeekdayHeader } from './CalendarBody.styled'
+import { getCalendarEndDate, getCalendarStartDate } from '../../../lib/calendarUtils'
+import { DayOfWeek } from '../../../lib/DayOfWeek'
+import Day from '../Day'
+import { BodyContainer, WeekdayHeader } from './Body.styled'
 
-interface ICalendarBodyProps {
+interface IBodyProps {
   currentMonth: Date
   numberOfWeeks: number
   weekStartsOn: DayOfWeek
 }
 
-const CalendarBody: React.FunctionComponent<ICalendarBodyProps> = (props) => {
+const Body: React.FunctionComponent<IBodyProps> = (props) => {
   const startDate = getCalendarStartDate(props.currentMonth, props.weekStartsOn)
   const endDate = getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn)
   const allDays = eachDay(startDate, endDate)
@@ -29,7 +29,7 @@ const CalendarBody: React.FunctionComponent<ICalendarBodyProps> = (props) => {
         const row = Math.floor(index / 7) + 2
         const column = (index % 7) + 1
         return (
-          <CalendarDay
+          <Day
             key={date.toISOString()}
             currentMonth={props.currentMonth}
             date={date}
@@ -42,4 +42,4 @@ const CalendarBody: React.FunctionComponent<ICalendarBodyProps> = (props) => {
   )
 }
 
-export default CalendarBody
+export default Body
