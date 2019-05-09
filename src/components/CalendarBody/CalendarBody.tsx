@@ -20,12 +20,24 @@ const CalendarBody: React.FunctionComponent<ICalendarBodyProps> = (props) => {
       {allDays
         .slice(0, 7)
         .map((date) => format(date, 'dddd'))
-        .map((weekday) => (
-          <WeekdayHeader key={weekday}>{weekday}</WeekdayHeader>
+        .map((weekday, index) => (
+          <WeekdayHeader key={weekday} row={1} column={index + 1}>
+            {weekday}
+          </WeekdayHeader>
         ))}
-      {allDays.map((date) => (
-        <CalendarDay key={date.toISOString()} currentMonth={props.currentMonth} date={date} />
-      ))}
+      {allDays.map((date, index) => {
+        const row = Math.floor(index / 7) + 2
+        const column = (index % 7) + 1
+        return (
+          <CalendarDay
+            key={date.toISOString()}
+            currentMonth={props.currentMonth}
+            date={date}
+            row={row}
+            column={column}
+          />
+        )
+      })}
     </BodyContainer>
   )
 }

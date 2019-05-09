@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export interface IDayContainerProps {
   isCurrentMonth?: boolean
   isToday?: boolean
+  row: number
+  column: number
 }
 
 export const DayContainer = styled.div<IDayContainerProps>`
@@ -13,6 +15,11 @@ export const DayContainer = styled.div<IDayContainerProps>`
   flex-direction: column;
   height: 100%;
   overflow-y: hidden;
+  grid-row: ${(props) => props.row};
+  grid-column: ${(props) => props.column};
+  /* IE 11 Support */
+  -ms-grid-row: ${(props) => props.row};
+  -ms-grid-column: ${(props) => props.column};
 `
 
 export const DayHeader = styled.div`
