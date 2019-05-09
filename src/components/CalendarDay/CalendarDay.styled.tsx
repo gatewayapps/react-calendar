@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '../../styles/styled-components'
 
 export interface IDayContainerProps {
   isCurrentMonth?: boolean
@@ -8,9 +8,16 @@ export interface IDayContainerProps {
 }
 
 export const DayContainer = styled.div<IDayContainerProps>`
-  background: ${(props) =>
-    props.isCurrentMonth ? (props.isToday ? 'lightGreen' : 'white') : '#eee'};
-  border: 1px solid black;
+  background: ${(props) => {
+    if (!props.isCurrentMonth) {
+      return props.theme.calendarDay.otherMonthBackgroundColor
+    } else if (props.isToday) {
+      return props.theme.calendarDay.todayBackgroundColor
+    } else {
+      return props.theme.calendarDay.currentMonthBackgroundColor
+    }
+  }};
+  border: 1px solid ${(props) => props.theme.calendarDay.borderColor};
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -24,7 +31,7 @@ export const DayContainer = styled.div<IDayContainerProps>`
 
 export const DayHeader = styled.div`
   background-color: #eee;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${(props) => props.theme.calendarDay.borderColor};
   font-size: 0.85em;
   font-weight: bold;
 `

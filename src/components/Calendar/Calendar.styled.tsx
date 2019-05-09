@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '../../styles/styled-components'
 
 export const CalendarContainer = styled.div`
   display: flex;
