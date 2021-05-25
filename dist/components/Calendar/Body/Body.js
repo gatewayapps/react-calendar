@@ -31,14 +31,20 @@ const Body = (props) => {
     const startDate = React.useMemo(() => calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn), [props.currentMonth, props.weekStartsOn]);
     const endDate = React.useMemo(() => calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn), [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]);
     const allDays = React.useMemo(() => date_fns_1.eachDay(startDate, endDate), [startDate, endDate]);
+    const updateScrollSync = React.useCallback(() => {
+        calendarUtils_1.setupScrollSync(props.shouldScrollSync);
+    }, [props.shouldScrollSync]);
     React.useEffect(() => {
         if (props.getCalendarDates) {
             props.getCalendarDates({ end: endDate, start: startDate });
         }
     }, [props.getCalendarDates, startDate, endDate]);
     React.useEffect(() => {
-        calendarUtils_1.setupScrollSync(props.shouldScrollSync);
-    }, [props.shouldScrollSync, startDate, endDate]);
+        if (!props.events || props.events.length <= 0) {
+            return;
+        }
+        updateScrollSync();
+    }, [props.events, startDate, endDate]);
     return (React.createElement(Body_styled_1.BodyContainer, { numberOfWeeks: props.numberOfWeeks },
         allDays
             .slice(0, 7)

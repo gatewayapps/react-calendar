@@ -31,6 +31,10 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
   )
   const allDays = React.useMemo(() => eachDay(startDate, endDate), [startDate, endDate])
 
+  const updateScrollSync = React.useCallback(() => {
+    setupScrollSync(props.shouldScrollSync)
+  }, [props.shouldScrollSync])
+
   React.useEffect(() => {
     if (props.getCalendarDates) {
       props.getCalendarDates({ end: endDate, start: startDate })
@@ -38,8 +42,12 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
   }, [props.getCalendarDates, startDate, endDate])
 
   React.useEffect(() => {
-    setupScrollSync(props.shouldScrollSync)
-  }, [props.shouldScrollSync, startDate, endDate])
+    if (!props.events || props.events.length <= 0) {
+      return
+    }
+
+    updateScrollSync()
+  }, [props.events, startDate, endDate])
 
   return (
     <BodyContainer numberOfWeeks={props.numberOfWeeks}>
