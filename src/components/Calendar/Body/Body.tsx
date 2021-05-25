@@ -29,7 +29,7 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
     if (props.getCalendarDates) {
       props.getCalendarDates({ end: endDate, start: startDate })
     }
-  }, [])
+  }, [props.getCalendarDates, startDate, endDate])
 
   React.useEffect(() => {
     setupScrollSync(props.shouldScrollSync)

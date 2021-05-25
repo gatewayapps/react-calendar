@@ -35,7 +35,7 @@ const Body = (props) => {
         if (props.getCalendarDates) {
             props.getCalendarDates({ end: endDate, start: startDate });
         }
-    }, []);
+    }, [props.getCalendarDates, startDate, endDate]);
     React.useEffect(() => {
         calendarUtils_1.setupScrollSync(props.shouldScrollSync);
     }, [props.shouldScrollSync]);
