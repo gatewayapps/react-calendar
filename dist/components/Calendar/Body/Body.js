@@ -38,7 +38,7 @@ const Body = (props) => {
     }, [props.getCalendarDates, startDate, endDate]);
     React.useEffect(() => {
         calendarUtils_1.setupScrollSync(props.shouldScrollSync);
-    }, [props.shouldScrollSync]);
+    }, [props.shouldScrollSync, startDate, endDate]);
     return (React.createElement(Body_styled_1.BodyContainer, { numberOfWeeks: props.numberOfWeeks },
         allDays
             .slice(0, 7)

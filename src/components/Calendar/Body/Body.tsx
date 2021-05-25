@@ -39,7 +39,7 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
 
   React.useEffect(() => {
     setupScrollSync(props.shouldScrollSync)
-  }, [props.shouldScrollSync])
+  }, [props.shouldScrollSync, startDate, endDate])
 
   return (
     <BodyContainer numberOfWeeks={props.numberOfWeeks}>
