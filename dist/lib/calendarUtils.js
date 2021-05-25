@@ -20,22 +20,22 @@ function getEventsForDay(date, events) {
         : [];
 }
 exports.getEventsForDay = getEventsForDay;
-function masterScrollEventHandler(evt) {
-    /* The acutal updating of the scroll position is throttle to prevent sluggish
-       scrolling behaviour when it is trying to rapidly update the scroll positions.
-       Throttled to 24 milliseconds is roughly 42 frames per second. */
-    const updateScrollPosition = throttle_1.throttle((scrollTop) => {
-        const dayScrollers = document.querySelectorAll('.events-container');
-        if (dayScrollers) {
-            dayScrollers.forEach((dayScroller) => {
-                dayScroller.scrollTop = scrollTop;
-            });
-        }
-    }, 24);
-    const scrollTop = evt.currentTarget.scrollTop;
-    updateScrollPosition(scrollTop);
-}
 function setupScrollSync(element, shouldScrollSync) {
+    const masterScrollEventHandler = (evt) => {
+        /* The acutal updating of the scroll position is throttle to prevent sluggish
+         scrolling behaviour when it is trying to rapidly update the scroll positions.
+         Throttled to 24 milliseconds is roughly 42 frames per second. */
+        const updateScrollPosition = throttle_1.throttle((scrollTop) => {
+            const dayScrollers = document.querySelectorAll('.events-container');
+            if (dayScrollers) {
+                dayScrollers.forEach((dayScroller) => {
+                    dayScroller.scrollTop = scrollTop;
+                });
+            }
+        }, 24);
+        const scrollTop = evt.currentTarget.scrollTop;
+        updateScrollPosition(scrollTop);
+    };
     const defaultScrollHandler = (evt) => (element.scrollTop = evt.currentTarget.scrollTop);
     element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler;
 }
