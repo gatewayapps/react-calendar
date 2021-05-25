@@ -44,7 +44,7 @@ const Body = (props) => {
             return;
         }
         updateScrollSync();
-    }, [allDays, startDate, endDate]);
+    }, [allDays, startDate, endDate, updateScrollSync]);
     return (React.createElement(Body_styled_1.BodyContainer, { numberOfWeeks: props.numberOfWeeks },
         allDays
             .slice(0, 7)

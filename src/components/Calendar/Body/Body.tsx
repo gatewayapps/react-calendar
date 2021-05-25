@@ -47,7 +47,7 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
     }
 
     updateScrollSync()
-  }, [allDays, startDate, endDate])
+  }, [allDays, startDate, endDate, updateScrollSync])
 
   return (
     <BodyContainer numberOfWeeks={props.numberOfWeeks}>
