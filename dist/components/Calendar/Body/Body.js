@@ -31,20 +31,11 @@ const Body = (props) => {
     const startDate = React.useMemo(() => calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn), [props.currentMonth, props.weekStartsOn]);
     const endDate = React.useMemo(() => calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn), [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]);
     const allDays = React.useMemo(() => date_fns_1.eachDay(startDate, endDate), [startDate, endDate]);
-    const updateScrollSync = React.useCallback(() => {
-        calendarUtils_1.setupScrollSync(props.shouldScrollSync);
-    }, [props.shouldScrollSync]);
     React.useEffect(() => {
         if (props.getCalendarDates) {
             props.getCalendarDates({ end: endDate, start: startDate });
         }
     }, [props.getCalendarDates, startDate, endDate]);
-    React.useEffect(() => {
-        if (!allDays || allDays.length <= 0) {
-            return;
-        }
-        updateScrollSync();
-    }, [allDays, startDate, endDate, updateScrollSync]);
     return (React.createElement(Body_styled_1.BodyContainer, { numberOfWeeks: props.numberOfWeeks },
         allDays
             .slice(0, 7)
@@ -53,7 +44,7 @@ const Body = (props) => {
         allDays.map((date, index) => {
             const row = Math.floor(index / 7) + 2;
             const column = (index % 7) + 1;
-            return (React.createElement(Day_1.default, { key: date.toISOString(), currentMonth: props.currentMonth, date: date, events: calendarUtils_1.getEventsForDay(date, props.events), row: row, column: column }));
+            return (React.createElement(Day_1.default, { key: date.toISOString(), currentMonth: props.currentMonth, date: date, events: calendarUtils_1.getEventsForDay(date, props.events), row: row, shouldScrollSync: props.shouldScrollSync, column: column }));
         })));
 };
 exports.default = Body;

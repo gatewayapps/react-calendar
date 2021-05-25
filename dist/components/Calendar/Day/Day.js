@@ -27,14 +27,24 @@ const date_fns_1 = require("date-fns");
 const React = __importStar(require("react"));
 const Day_styled_1 = require("./Day.styled");
 const Event_1 = __importDefault(require("../Event"));
+const calendarUtils_1 = require("../../../lib/calendarUtils");
 const CalendarDay = (props) => {
+    const [eventContainerRef, setEventContainerRef] = React.useState(null);
     const dayClasses = classnames_1.default({
         firstDayOfWeek: props.column === 1,
         lastDayOfWeek: props.column === 7
     });
+    const updateScrollSync = React.useCallback((element) => {
+        calendarUtils_1.setupScrollSync(element, props.shouldScrollSync);
+    }, [props.shouldScrollSync]);
+    React.useEffect(() => {
+        if (eventContainerRef) {
+            updateScrollSync(eventContainerRef);
+        }
+    }, [eventContainerRef, updateScrollSync]);
     return (React.createElement(Day_styled_1.DayContainer, { className: dayClasses, isCurrentMonth: date_fns_1.isSameMonth(props.currentMonth, props.date), isToday: date_fns_1.isToday(props.date), row: props.row, column: props.column },
         React.createElement(Day_styled_1.DayHeader, null, props.date.getDate()),
-        React.createElement(Day_styled_1.EventsContainer, null, props.events.map((event) => (React.createElement(Event_1.default, Object.assign({}, event, { key: event.id })))))));
+        React.createElement(Day_styled_1.EventsContainer, { ref: setEventContainerRef }, props.events.map((event) => (React.createElement(Event_1.default, Object.assign({}, event, { key: event.id })))))));
 };
 exports.default = CalendarDay;
 //# sourceMappingURL=Day.js.map

@@ -6,6 +6,7 @@ interface IDayProps {
     events: IEvent[];
     row: number;
     column: number;
+    shouldScrollSync?: boolean;
 }
 declare const CalendarDay: React.FunctionComponent<IDayProps>;
 export default CalendarDay;

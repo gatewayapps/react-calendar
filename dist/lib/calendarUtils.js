@@ -35,15 +35,9 @@ function masterScrollEventHandler(evt) {
     const scrollTop = evt.currentTarget.scrollTop;
     updateScrollPosition(scrollTop);
 }
-function setupScrollSync(shouldScrollSync) {
-    const scrollWrappers = document.querySelectorAll('.events-container');
-    if (scrollWrappers && scrollWrappers.length > 0) {
-        scrollWrappers.forEach((container) => {
-            const element = container;
-            const defaultScrollHandler = (evt) => (element.scrollTop = evt.currentTarget.scrollTop);
-            element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler;
-        });
-    }
+function setupScrollSync(element, shouldScrollSync) {
+    const defaultScrollHandler = (evt) => (element.scrollTop = evt.currentTarget.scrollTop);
+    element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler;
 }
 exports.setupScrollSync = setupScrollSync;
 //# sourceMappingURL=calendarUtils.js.map

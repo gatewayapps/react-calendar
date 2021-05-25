@@ -4,6 +4,7 @@ import * as React from 'react'
 import { DayContainer, DayHeader, EventsContainer } from './Day.styled'
 import Event from '../Event'
 import { IEvent } from '../../../lib/event'
+import { setupScrollSync } from '../../../lib/calendarUtils'
 
 interface IDayProps {
   currentMonth: Date
@@ -11,13 +12,28 @@ interface IDayProps {
   events: IEvent[]
   row: number
   column: number
+  shouldScrollSync?: boolean
 }
 
 const CalendarDay: React.FunctionComponent<IDayProps> = (props) => {
+  const [eventContainerRef, setEventContainerRef] = React.useState<HTMLDivElement | null>(null)
   const dayClasses = cn({
     firstDayOfWeek: props.column === 1,
     lastDayOfWeek: props.column === 7
   })
+
+  const updateScrollSync = React.useCallback(
+    (element: HTMLDivElement) => {
+      setupScrollSync(element, props.shouldScrollSync)
+    },
+    [props.shouldScrollSync]
+  )
+
+  React.useEffect(() => {
+    if (eventContainerRef) {
+      updateScrollSync(eventContainerRef)
+    }
+  }, [eventContainerRef, updateScrollSync])
 
   return (
     <DayContainer
@@ -27,7 +43,7 @@ const CalendarDay: React.FunctionComponent<IDayProps> = (props) => {
       row={props.row}
       column={props.column}>
       <DayHeader>{props.date.getDate()}</DayHeader>
-      <EventsContainer>
+      <EventsContainer ref={setEventContainerRef}>
         {props.events.map((event) => (
           <Event {...event} key={event.id} />
         ))}

@@ -3,8 +3,7 @@ import * as React from 'react'
 import {
   getCalendarEndDate,
   getCalendarStartDate,
-  getEventsForDay,
-  setupScrollSync
+  getEventsForDay
 } from '../../../lib/calendarUtils'
 import { DayOfWeek } from '../../../lib/DayOfWeek'
 import Day from '../Day'
@@ -31,23 +30,11 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
   )
   const allDays = React.useMemo(() => eachDay(startDate, endDate), [startDate, endDate])
 
-  const updateScrollSync = React.useCallback(() => {
-    setupScrollSync(props.shouldScrollSync)
-  }, [props.shouldScrollSync])
-
   React.useEffect(() => {
     if (props.getCalendarDates) {
       props.getCalendarDates({ end: endDate, start: startDate })
     }
   }, [props.getCalendarDates, startDate, endDate])
-
-  React.useEffect(() => {
-    if (!allDays || allDays.length <= 0) {
-      return
-    }
-
-    updateScrollSync()
-  }, [allDays, startDate, endDate, updateScrollSync])
 
   return (
     <BodyContainer numberOfWeeks={props.numberOfWeeks}>
@@ -69,6 +56,7 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
             date={date}
             events={getEventsForDay(date, props.events)}
             row={row}
+            shouldScrollSync={props.shouldScrollSync}
             column={column}
           />
         )

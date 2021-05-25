@@ -41,15 +41,8 @@ function masterScrollEventHandler(evt: Event) {
   updateScrollPosition(scrollTop)
 }
 
-export function setupScrollSync(shouldScrollSync?: boolean) {
-  const scrollWrappers = document.querySelectorAll('.events-container')
-
-  if (scrollWrappers && scrollWrappers.length > 0) {
-    scrollWrappers.forEach((container) => {
-      const element = container as HTMLElement
-      const defaultScrollHandler = (evt: Event) =>
-        (element.scrollTop = (evt.currentTarget as HTMLElement).scrollTop)
-      element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler
-    })
-  }
+export function setupScrollSync(element: HTMLDivElement, shouldScrollSync?: boolean) {
+  const defaultScrollHandler = (evt: Event) =>
+    (element.scrollTop = (evt.currentTarget as HTMLElement).scrollTop)
+  element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler
 }
