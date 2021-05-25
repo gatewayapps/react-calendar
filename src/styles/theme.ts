@@ -10,9 +10,16 @@ export interface ICalendarDayTheme {
   headerBackgroundColor: string
 }
 
+export interface IEventTheme {
+  backgroundColor: string
+  borderColor: string
+  color: string
+}
+
 export interface ITheme {
   calendar: ICalendarTheme
   calendarDay: ICalendarDayTheme
+  event: IEventTheme
 }
 
 export const defaultTheme: ITheme = {
@@ -20,10 +27,15 @@ export const defaultTheme: ITheme = {
     backgroundColor: '#fff'
   },
   calendarDay: {
-    borderColor: 'black',
+    borderColor: '#000',
     currentMonthBackgroundColor: '#fff',
     headerBackgroundColor: '#eee',
     otherMonthBackgroundColor: '#eee',
     todayBackgroundColor: 'lightYellow'
+  },
+  event: {
+    backgroundColor: '#ddd',
+    borderColor: '#000',
+    color: '#000'
   }
 }

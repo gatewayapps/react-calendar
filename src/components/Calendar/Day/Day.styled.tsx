@@ -45,7 +45,10 @@ export const DayHeader = styled.div`
   padding: 0 0.5em;
 `
 
-export const EventsContainer = styled.div`
+export const EventsContainer = styled.div.attrs({
+  className: 'events-container'
+})`
   flex: 1;
+  max-height: 115px;
   overflow-y: auto;
 `

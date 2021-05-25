@@ -1,12 +1,20 @@
 import { eachDay, format } from 'date-fns'
 import * as React from 'react'
-import { getCalendarEndDate, getCalendarStartDate } from '../../../lib/calendarUtils'
+import {
+  getCalendarEndDate,
+  getCalendarStartDate,
+  getEventsForDay,
+  setupScrollSync
+} from '../../../lib/calendarUtils'
 import { DayOfWeek } from '../../../lib/DayOfWeek'
 import Day from '../Day'
+import { IEventSource } from '../../../lib/eventSource'
 import { BodyContainer, WeekdayHeader } from './Body.styled'
 
 interface IBodyProps {
   currentMonth: Date
+  events?: IEventSource[]
+  shouldScrollSync?: boolean
   numberOfWeeks: number
   weekStartsOn: DayOfWeek
 }
@@ -15,6 +23,11 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
   const startDate = getCalendarStartDate(props.currentMonth, props.weekStartsOn)
   const endDate = getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn)
   const allDays = eachDay(startDate, endDate)
+
+  React.useEffect(() => {
+    setupScrollSync(props.shouldScrollSync)
+  }, [props.shouldScrollSync])
+
   return (
     <BodyContainer numberOfWeeks={props.numberOfWeeks}>
       {allDays
@@ -33,6 +46,7 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
             key={date.toISOString()}
             currentMonth={props.currentMonth}
             date={date}
+            events={getEventsForDay(date, props.events)}
             row={row}
             column={column}
           />

@@ -2,10 +2,13 @@ import cn from 'classnames'
 import { isSameMonth, isToday } from 'date-fns'
 import * as React from 'react'
 import { DayContainer, DayHeader, EventsContainer } from './Day.styled'
+import Event from '../Event'
+import { IEvent } from '../../../lib/event'
 
 interface IDayProps {
   currentMonth: Date
   date: Date
+  events: IEvent[]
   row: number
   column: number
 }
@@ -24,7 +27,11 @@ const CalendarDay: React.FunctionComponent<IDayProps> = (props) => {
       row={props.row}
       column={props.column}>
       <DayHeader>{props.date.getDate()}</DayHeader>
-      <EventsContainer />
+      <EventsContainer>
+        {props.events.map((event) => (
+          <Event {...event} key={event.id} />
+        ))}
+      </EventsContainer>
     </DayContainer>
   )
 }

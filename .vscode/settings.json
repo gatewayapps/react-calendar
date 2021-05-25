@@ -20,7 +20,6 @@
   "[handlebars]": {
     "editor.formatOnSave": false
   },
-  "prettier.tslintIntegration": true,
   "files.insertFinalNewline": true,
   "files.exclude": {
     "**/.git": true,
