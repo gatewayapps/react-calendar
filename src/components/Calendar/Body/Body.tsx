@@ -14,6 +14,7 @@ import { BodyContainer, WeekdayHeader } from './Body.styled'
 interface IBodyProps {
   currentMonth: Date
   events?: IEventSource[]
+  getCalendarDates?: (values: { start: Date; end: Date }) => void
   shouldScrollSync?: boolean
   numberOfWeeks: number
   weekStartsOn: DayOfWeek
@@ -23,6 +24,12 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
   const startDate = getCalendarStartDate(props.currentMonth, props.weekStartsOn)
   const endDate = getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn)
   const allDays = eachDay(startDate, endDate)
+
+  React.useEffect(() => {
+    if (props.getCalendarDates) {
+      props.getCalendarDates({ end: endDate, start: startDate })
+    }
+  }, [])
 
   React.useEffect(() => {
     setupScrollSync(props.shouldScrollSync)

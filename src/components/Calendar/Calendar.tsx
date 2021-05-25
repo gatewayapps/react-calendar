@@ -12,6 +12,7 @@ import Header from './Header'
 export interface ICalendarProps {
   defaultDate?: Date
   events?: IEventSource[]
+  getCalendarDates?: (values: { start: Date; end: Date }) => void
   weekStartsOn?: DayOfWeek
   shouldScrollSync?: boolean
 }
@@ -27,6 +28,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps
         <Body
           currentMonth={currentMonth}
           events={props.events}
+          getCalendarDates={props.getCalendarDates}
           numberOfWeeks={DEFAULT_NUMBER_OF_WEEKS}
           weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}
           shouldScrollSync={props.shouldScrollSync}
