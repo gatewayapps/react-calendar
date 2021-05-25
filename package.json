@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "React.js Calendar Component",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "repository": "https://github.com/gatewayapps/react-calendar",
   "author": "Gateway Apps, LLC",
   "contributors": [
@@ -12,7 +13,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "storybook": "start-storybook -p 3700"
+    "storybook": "start-storybook -p 3700",
+    "build": "yarn tsc --project tsconfig-build.json"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -25,7 +27,7 @@
     "@types/jest": "^24.0.12",
     "@types/react": "^16.8.16",
     "@types/storybook__react": "^4.0.1",
-    "@types/styled-components": "4.1.8",
+    "@types/styled-components": "^5.1.9",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.0.5",
     "enzyme": "^3.11.0",
