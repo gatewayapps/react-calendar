@@ -4,6 +4,10 @@ import { IEventSource } from '../../lib/eventSource';
 export interface ICalendarProps {
     defaultDate?: Date;
     events?: IEventSource[];
+    getCalendarDates?: (values: {
+        start: Date;
+        end: Date;
+    }) => void;
     weekStartsOn?: DayOfWeek;
     shouldScrollSync?: boolean;
 }

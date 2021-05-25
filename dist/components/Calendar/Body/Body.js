@@ -32,6 +32,11 @@ const Body = (props) => {
     const endDate = calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn);
     const allDays = date_fns_1.eachDay(startDate, endDate);
     React.useEffect(() => {
+        if (props.getCalendarDates) {
+            props.getCalendarDates({ end: endDate, start: startDate });
+        }
+    }, []);
+    React.useEffect(() => {
         calendarUtils_1.setupScrollSync(props.shouldScrollSync);
     }, [props.shouldScrollSync]);
     return (React.createElement(Body_styled_1.BodyContainer, { numberOfWeeks: props.numberOfWeeks },
