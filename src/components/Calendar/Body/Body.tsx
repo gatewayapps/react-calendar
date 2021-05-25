@@ -21,9 +21,15 @@ interface IBodyProps {
 }
 
 const Body: React.FunctionComponent<IBodyProps> = (props) => {
-  const startDate = getCalendarStartDate(props.currentMonth, props.weekStartsOn)
-  const endDate = getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn)
-  const allDays = eachDay(startDate, endDate)
+  const startDate = React.useMemo(
+    () => getCalendarStartDate(props.currentMonth, props.weekStartsOn),
+    [props.currentMonth, props.weekStartsOn]
+  )
+  const endDate = React.useMemo(
+    () => getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn),
+    [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]
+  )
+  const allDays = React.useMemo(() => eachDay(startDate, endDate), [startDate, endDate])
 
   React.useEffect(() => {
     if (props.getCalendarDates) {

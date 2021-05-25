@@ -28,9 +28,9 @@ const calendarUtils_1 = require("../../../lib/calendarUtils");
 const Day_1 = __importDefault(require("../Day"));
 const Body_styled_1 = require("./Body.styled");
 const Body = (props) => {
-    const startDate = calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn);
-    const endDate = calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn);
-    const allDays = date_fns_1.eachDay(startDate, endDate);
+    const startDate = React.useMemo(() => calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn), [props.currentMonth, props.weekStartsOn]);
+    const endDate = React.useMemo(() => calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn), [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]);
+    const allDays = React.useMemo(() => date_fns_1.eachDay(startDate, endDate), [startDate, endDate]);
     React.useEffect(() => {
         if (props.getCalendarDates) {
             props.getCalendarDates({ end: endDate, start: startDate });
