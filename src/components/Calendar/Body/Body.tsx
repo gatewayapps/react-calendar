@@ -42,12 +42,12 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
   }, [props.getCalendarDates, startDate, endDate])
 
   React.useEffect(() => {
-    if (!props.events || props.events.length <= 0) {
+    if (!allDays || allDays.length <= 0) {
       return
     }
 
     updateScrollSync()
-  }, [props.events, startDate, endDate])
+  }, [allDays, startDate, endDate])
 
   return (
     <BodyContainer numberOfWeeks={props.numberOfWeeks}>

@@ -40,11 +40,11 @@ const Body = (props) => {
         }
     }, [props.getCalendarDates, startDate, endDate]);
     React.useEffect(() => {
-        if (!props.events || props.events.length <= 0) {
+        if (!allDays || allDays.length <= 0) {
             return;
         }
         updateScrollSync();
-    }, [props.events, startDate, endDate]);
+    }, [allDays, startDate, endDate]);
     return (React.createElement(Body_styled_1.BodyContainer, { numberOfWeeks: props.numberOfWeeks },
         allDays
             .slice(0, 7)
