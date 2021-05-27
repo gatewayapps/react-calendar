@@ -37,7 +37,7 @@ const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
 const pro_solid_svg_icons_1 = require("@fortawesome/pro-solid-svg-icons");
 const DatePicker = (_a) => {
     var { className } = _a, props = __rest(_a, ["className"]);
-    const [calendarDatePickerRef, setCalendarDatePickerRef] = React.useState();
+    const [calendarDatePickerRef, setCalendarDatePickerRef] = React.useState(null);
     const openDatePicker = React.useCallback((evt) => {
         if (calendarDatePickerRef) {
             const currentCalendarRef = calendarDatePickerRef;
