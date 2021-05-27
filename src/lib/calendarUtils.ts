@@ -1,4 +1,6 @@
+import * as React from 'react'
 import { addWeeks, endOfWeek, startOfDay, startOfMonth, startOfWeek } from 'date-fns'
+import { Calendar } from '@bit/primefaces.primereact.calendar'
 import { DayOfWeek } from './DayOfWeek'
 import { IEvent } from './event'
 import { IEventSource } from './eventSource'
@@ -45,4 +47,15 @@ export function setupScrollSync(element: HTMLDivElement, shouldScrollSync?: bool
   const defaultScrollHandler = (evt: Event) =>
     (element.scrollTop = (evt.currentTarget as HTMLElement).scrollTop)
   element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler
+}
+
+export function onDatePickerOpen(
+  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  calendarDatePickerRef: React.RefObject<Calendar>
+) {
+  if (calendarDatePickerRef.current) {
+    console.log('test')
+    const currentCalendarRef = calendarDatePickerRef.current as any
+    currentCalendarRef.onInputFocus(event)
+  }
 }

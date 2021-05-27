@@ -15,6 +15,8 @@ export interface ICalendarProps {
   getCalendarDates?: (values: { start: Date; end: Date }) => void
   weekStartsOn?: DayOfWeek
   shouldScrollSync?: boolean
+  shouldShowDatePicker?: boolean
+  shouldShowTodayButton?: boolean
 }
 
 const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps) => {
@@ -24,7 +26,12 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps
   return (
     <ThemeProvider theme={defaultTheme}>
       <CalendarContainer>
-        <Header currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />
+        <Header
+          currentMonth={currentMonth}
+          setCurrentMonth={setCurrentMonth}
+          shouldShowDatePicker={props.shouldShowDatePicker}
+          shouldShowTodayButton={props.shouldShowTodayButton}
+        />
         <Body
           currentMonth={currentMonth}
           events={props.events}

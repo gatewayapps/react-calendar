@@ -9,10 +9,6 @@ export const BodyContainer = styled.div<IBodyContainerProps>`
   flex: 1;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: auto repeat(${(props) => props.numberOfWeeks}, 1fr);
-  /* IE11 Support */
-  display: -ms-grid;
-  -ms-grid-columns: ${() => '1fr '.repeat(7).trim()};
-  -ms-grid-rows: auto ${(props) => '1fr '.repeat(props.numberOfWeeks).trim()};
 `
 
 export interface IWeekdayHeaderProps {
@@ -21,12 +17,14 @@ export interface IWeekdayHeaderProps {
 }
 
 export const WeekdayHeader = styled.div<IWeekdayHeaderProps>`
+  align-items: center;
+  background-color: ${(props) => props.theme.weekdayHeader.backgroundColor};
+  color: ${(props) => props.theme.weekdayHeader.color};
+  display: flex;
   font-weight: bold;
+  justify-content: center;
   text-align: center;
-  padding-bottom: 0.25em;
+  padding: 0.571em 1em;
   grid-row: ${(props) => props.row};
   grid-column: ${(props) => props.column};
-  /* IE 11 Support */
-  -ms-grid-row: ${(props) => props.row};
-  -ms-grid-column: ${(props) => props.column};
 `
