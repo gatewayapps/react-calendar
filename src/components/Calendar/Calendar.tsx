@@ -15,6 +15,7 @@ export interface ICalendarProps {
   getCalendarDates?: (values: { start: Date; end: Date }) => void
   weekStartsOn?: DayOfWeek
   shouldScrollSync?: boolean
+  shouldShowDatePicker?: boolean
   shouldShowTodayButton?: boolean
 }
 
@@ -29,6 +30,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps
           currentMonth={currentMonth}
           setCurrentMonth={setCurrentMonth}
           shouldShowTodayButton={props.shouldShowTodayButton}
+          shouldShowDatePicker={props.shouldShowDatePicker}
         />
         <Body
           currentMonth={currentMonth}

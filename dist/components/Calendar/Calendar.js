@@ -34,7 +34,7 @@ const Calendar = (props) => {
     const [currentMonth, setCurrentMonth] = react_1.useState(date_fns_1.startOfMonth(props.defaultDate || new Date()));
     return (react_1.default.createElement(styled_components_1.ThemeProvider, { theme: theme_1.defaultTheme },
         react_1.default.createElement(Calendar_styled_1.CalendarContainer, null,
-            react_1.default.createElement(Header_1.default, { currentMonth: currentMonth, setCurrentMonth: setCurrentMonth, shouldShowTodayButton: props.shouldShowTodayButton }),
+            react_1.default.createElement(Header_1.default, { currentMonth: currentMonth, setCurrentMonth: setCurrentMonth, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker }),
             react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync }))));
 };
 exports.default = Calendar;

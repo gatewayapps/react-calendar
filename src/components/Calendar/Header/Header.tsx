@@ -9,6 +9,7 @@ interface IHeaderProps {
   currentMonth: Date
   setCurrentMonth: (date: Date) => void
   shouldShowTodayButton?: boolean
+  shouldShowDatePicker?: boolean
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
@@ -32,7 +33,13 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           onClick={() => props.setCurrentMonth(subMonths(props.currentMonth, 1))}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        <DatePicker />
+        {props.shouldShowDatePicker && (
+          <DatePicker
+            onChange={(evt) => props.setCurrentMonth(evt as Date)}
+            showMonthYearPicker
+            showYearDropdown
+          />
+        )}
         <button
           style={{ marginLeft: '5px' }}
           className="nav-button"
