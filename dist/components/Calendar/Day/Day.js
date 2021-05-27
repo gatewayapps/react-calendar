@@ -55,9 +55,7 @@ const CalendarDay = (_a) => {
         }
     }, [eventContainerRef, updateScrollSync]);
     return (React.createElement(Day_styled_1.DayContainer, { className: dayClasses, isCurrentMonth: date_fns_1.isSameMonth(props.currentMonth, props.date), isToday: date_fns_1.isToday(props.date), row: props.row, column: props.column },
-        React.createElement(Day_styled_1.DayHeader, null,
-            props.date.getDate(),
-            dayHeaderComponent),
+        React.createElement(Day_styled_1.DayHeader, null, dayHeaderComponent ? dayHeaderComponent({ date: props.date }) : props.date.getDate()),
         React.createElement(Day_styled_1.EventsContainer, { ref: setEventContainerRef }, props.events.map((event) => (React.createElement(Event_1.default, Object.assign({}, event, { key: event.id })))))));
 };
 exports.default = CalendarDay;

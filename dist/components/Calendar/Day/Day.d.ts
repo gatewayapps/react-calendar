@@ -7,7 +7,9 @@ interface IDayProps {
     row: number;
     column: number;
     shouldScrollSync?: boolean;
-    dayHeaderComponent?: React.ReactNode;
+    dayHeaderComponent?: (props: {
+        date: Date;
+    }) => JSX.Element;
 }
 declare const CalendarDay: React.FunctionComponent<IDayProps>;
 export default CalendarDay;

@@ -12,7 +12,9 @@ export interface ICalendarProps {
     shouldScrollSync?: boolean;
     shouldShowDatePicker?: boolean;
     shouldShowTodayButton?: boolean;
-    dayHeaderComponent?: React.ReactNode;
+    dayHeaderComponent?: (props: {
+        date: Date;
+    }) => JSX.Element;
 }
 declare const Calendar: React.FunctionComponent<ICalendarProps>;
 export default Calendar;
