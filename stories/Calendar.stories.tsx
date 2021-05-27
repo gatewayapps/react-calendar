@@ -1,3 +1,4 @@
+import '../css/react-datepicker.css'
 import React from 'react'
 import { Calendar } from '../src'
 
