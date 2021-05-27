@@ -1,4 +1,3 @@
-import 'react-datepicker/dist/react-datepicker.css'
 import * as React from 'react'
 import Datepicker, { ReactDatePickerProps } from 'react-datepicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

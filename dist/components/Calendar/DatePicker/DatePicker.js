@@ -22,7 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("react-datepicker/dist/react-datepicker.css");
 const React = __importStar(require("react"));
 const react_datepicker_1 = __importDefault(require("react-datepicker"));
 const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
