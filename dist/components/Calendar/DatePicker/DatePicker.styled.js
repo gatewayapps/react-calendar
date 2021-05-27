@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CalendarDatePicker = exports.CalendarDatePickerWrapper = exports.CalandarDatePickerButton = void 0;
-const primefaces_primereact_calendar_1 = require("@bit/primefaces.primereact.calendar");
+//import { Calendar } from '@bit/primefaces.primereact.calendar'
 const styled_components_1 = __importDefault(require("../../../styles/styled-components"));
 exports.CalandarDatePickerButton = styled_components_1.default.button `
   display: inline-block;
@@ -18,7 +18,7 @@ exports.CalendarDatePickerWrapper = styled_components_1.default.div `
   position: absolute;
   left: -1px;
 `;
-exports.CalendarDatePicker = styled_components_1.default(primefaces_primereact_calendar_1.Calendar) `
+exports.CalendarDatePicker = styled_components_1.default.div `
   display: none;
 
   input {

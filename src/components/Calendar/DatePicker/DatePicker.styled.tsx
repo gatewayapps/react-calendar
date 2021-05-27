@@ -1,4 +1,4 @@
-import { Calendar } from '@bit/primefaces.primereact.calendar'
+//import { Calendar } from '@bit/primefaces.primereact.calendar'
 import styled from '../../../styles/styled-components'
 
 export const CalandarDatePickerButton = styled.button`
@@ -15,7 +15,7 @@ export const CalendarDatePickerWrapper = styled.div`
   left: -1px;
 `
 
-export const CalendarDatePicker = styled(Calendar)`
+export const CalendarDatePicker = styled.div`
   display: none;
 
   input {

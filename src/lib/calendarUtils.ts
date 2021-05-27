@@ -1,6 +1,4 @@
-import * as React from 'react'
 import { addWeeks, endOfWeek, startOfDay, startOfMonth, startOfWeek } from 'date-fns'
-import { Calendar } from '@bit/primefaces.primereact.calendar'
 import { DayOfWeek } from './DayOfWeek'
 import { IEvent } from './event'
 import { IEventSource } from './eventSource'

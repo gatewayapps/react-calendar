@@ -38,7 +38,7 @@ const Header = (props) => {
                 React.createElement("span", null, "Today"))),
             React.createElement("button", { style: { marginRight: '5px' }, className: "nav-button", onClick: () => props.setCurrentMonth(date_fns_1.subMonths(props.currentMonth, 1)) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faChevronLeft })),
-            React.createElement(DatePicker_1.default, { className: "nav-button", dateFormat: "mm/yy", view: "month", yearRange: "2015:2050", onChange: ({ value }) => props.setCurrentMonth(value), yearNavigator: true }),
+            React.createElement(DatePicker_1.default, null),
             React.createElement("button", { style: { marginLeft: '5px' }, className: "nav-button", onClick: () => props.setCurrentMonth(date_fns_1.addMonths(props.currentMonth, 1)) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faChevronRight })))));
 };

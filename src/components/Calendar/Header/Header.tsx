@@ -32,14 +32,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           onClick={() => props.setCurrentMonth(subMonths(props.currentMonth, 1))}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        <DatePicker
-          className="nav-button"
-          dateFormat="mm/yy"
-          view="month"
-          yearRange="2015:2050"
-          onChange={({ value }) => props.setCurrentMonth(value as Date)}
-          yearNavigator
-        />
+        <DatePicker />
         <button
           style={{ marginLeft: '5px' }}
           className="nav-button"
