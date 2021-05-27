@@ -17,6 +17,7 @@ export interface ICalendarProps {
   shouldScrollSync?: boolean
   shouldShowDatePicker?: boolean
   shouldShowTodayButton?: boolean
+  dayHeaderComponent?: React.ReactNode
 }
 
 const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps) => {
@@ -39,6 +40,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps
           numberOfWeeks={DEFAULT_NUMBER_OF_WEEKS}
           weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}
           shouldScrollSync={props.shouldScrollSync}
+          dayHeaderComponent={props.dayHeaderComponent}
         />
       </CalendarContainer>
     </ThemeProvider>

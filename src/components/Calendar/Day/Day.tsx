@@ -13,9 +13,10 @@ interface IDayProps {
   row: number
   column: number
   shouldScrollSync?: boolean
+  dayHeaderComponent?: React.ReactNode
 }
 
-const CalendarDay: React.FunctionComponent<IDayProps> = (props) => {
+const CalendarDay: React.FunctionComponent<IDayProps> = ({ dayHeaderComponent, ...props }) => {
   const [eventContainerRef, setEventContainerRef] = React.useState<HTMLDivElement | null>(null)
   const dayClasses = cn({
     firstDayOfWeek: props.column === 1,
@@ -42,7 +43,10 @@ const CalendarDay: React.FunctionComponent<IDayProps> = (props) => {
       isToday={isToday(props.date)}
       row={props.row}
       column={props.column}>
-      <DayHeader>{props.date.getDate()}</DayHeader>
+      <DayHeader>
+        {props.date.getDate()}
+        {dayHeaderComponent}
+      </DayHeader>
       <EventsContainer ref={setEventContainerRef}>
         {props.events.map((event) => (
           <Event {...event} key={event.id} />

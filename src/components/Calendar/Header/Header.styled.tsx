@@ -4,7 +4,6 @@ export const HeaderContainer = styled.div`
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  height: 50px;
   padding: 0.5em;
 `
 
@@ -37,4 +36,5 @@ export const Title = styled.h2`
   font-size: ${(props) => props.theme.header.title.fontSize};
   color: ${(props) => props.theme.header.title.color};
   justify-self: center;
+  margin: 0px;
 `

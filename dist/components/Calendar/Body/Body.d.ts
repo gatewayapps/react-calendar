@@ -11,6 +11,7 @@ interface IBodyProps {
     shouldScrollSync?: boolean;
     numberOfWeeks: number;
     weekStartsOn: DayOfWeek;
+    dayHeaderComponent?: React.ReactNode;
 }
 declare const Body: React.FunctionComponent<IBodyProps>;
 export default Body;

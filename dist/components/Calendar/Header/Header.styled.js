@@ -9,7 +9,6 @@ exports.HeaderContainer = styled_components_1.default.div `
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  height: 50px;
   padding: 0.5em;
 `;
 exports.NavContainer = styled_components_1.default.div `
@@ -40,5 +39,6 @@ exports.Title = styled_components_1.default.h2 `
   font-size: ${(props) => props.theme.header.title.fontSize};
   color: ${(props) => props.theme.header.title.color};
   justify-self: center;
+  margin: 0px;
 `;
 //# sourceMappingURL=Header.styled.js.map
