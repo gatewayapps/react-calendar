@@ -48,13 +48,3 @@ export function setupScrollSync(element: HTMLDivElement, shouldScrollSync?: bool
     (element.scrollTop = (evt.currentTarget as HTMLElement).scrollTop)
   element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler
 }
-
-export function onDatePickerOpen(
-  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  calendarDatePickerRef: React.RefObject<Calendar>
-) {
-  if (calendarDatePickerRef.current) {
-    const currentCalendarRef = calendarDatePickerRef.current as any
-    currentCalendarRef.onInputFocus(event)
-  }
-}

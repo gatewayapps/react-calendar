@@ -35,13 +35,15 @@ const React = __importStar(require("react"));
 const DatePicker_styled_1 = require("./DatePicker.styled");
 const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
 const pro_solid_svg_icons_1 = require("@fortawesome/pro-solid-svg-icons");
-const calendarUtils_1 = require("../../../lib/calendarUtils");
 const DatePicker = (_a) => {
     var { className } = _a, props = __rest(_a, ["className"]);
     const calendarDatePickerRef = React.createRef();
     const openDatePicker = React.useCallback((evt) => {
-        calendarUtils_1.onDatePickerOpen(evt, calendarDatePickerRef);
-    }, [calendarDatePickerRef]);
+        if (calendarDatePickerRef.current) {
+            const currentCalendarRef = calendarDatePickerRef.current;
+            currentCalendarRef.onInputFocus(evt);
+        }
+    }, [calendarDatePickerRef.current]);
     return (React.createElement(DatePicker_styled_1.CalandarDatePickerButton, { className: `${className} date-picker-button`, onClick: openDatePicker },
         React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faCalendarEdit }),
         React.createElement("span", null, "Select Date"),

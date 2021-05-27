@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onDatePickerOpen = exports.setupScrollSync = exports.getEventsForDay = exports.getCalendarEndDate = exports.getCalendarStartDate = void 0;
+exports.setupScrollSync = exports.getEventsForDay = exports.getCalendarEndDate = exports.getCalendarStartDate = void 0;
 const date_fns_1 = require("date-fns");
 const DayOfWeek_1 = require("./DayOfWeek");
 const throttle_1 = require("./throttle");
@@ -40,11 +40,4 @@ function setupScrollSync(element, shouldScrollSync) {
     element.onscroll = shouldScrollSync ? masterScrollEventHandler : defaultScrollHandler;
 }
 exports.setupScrollSync = setupScrollSync;
-function onDatePickerOpen(event, calendarDatePickerRef) {
-    if (calendarDatePickerRef.current) {
-        const currentCalendarRef = calendarDatePickerRef.current;
-        currentCalendarRef.onInputFocus(event);
-    }
-}
-exports.onDatePickerOpen = onDatePickerOpen;
 //# sourceMappingURL=calendarUtils.js.map

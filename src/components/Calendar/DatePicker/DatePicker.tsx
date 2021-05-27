@@ -9,16 +9,18 @@ import { Calendar } from '@bit/primefaces.primereact.calendar'
 import { CalendarProps } from '@bit/primefaces.primereact.calendar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarEdit } from '@fortawesome/pro-solid-svg-icons'
-import { onDatePickerOpen } from '../../../lib/calendarUtils'
 
 const DatePicker: React.FunctionComponent<CalendarProps> = ({ className, ...props }) => {
   const calendarDatePickerRef = React.createRef<Calendar>()
 
   const openDatePicker = React.useCallback(
     (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      onDatePickerOpen(evt, calendarDatePickerRef)
+      if (calendarDatePickerRef.current) {
+        const currentCalendarRef = calendarDatePickerRef.current as any
+        currentCalendarRef.onInputFocus(evt)
+      }
     },
-    [calendarDatePickerRef]
+    [calendarDatePickerRef.current]
   )
 
   return (
