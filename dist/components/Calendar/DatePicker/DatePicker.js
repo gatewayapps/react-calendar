@@ -31,7 +31,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 require("@fortawesome/fontawesome-pro/js/all.min.js");
-require("@fortawesome/fontawesome-pro/css/all.min.css");
 const React = __importStar(require("react"));
 const DatePicker_styled_1 = require("./DatePicker.styled");
 const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
