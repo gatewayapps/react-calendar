@@ -11,16 +11,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarEdit } from '@fortawesome/pro-solid-svg-icons'
 
 const DatePicker: React.FunctionComponent<CalendarProps> = ({ className, ...props }) => {
-  const calendarDatePickerRef = React.createRef<Calendar>()
+  const [calendarDatePickerRef, setCalendarDatePickerRef] = React.useState<Calendar | null>()
 
   const openDatePicker = React.useCallback(
     (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      if (calendarDatePickerRef.current) {
-        const currentCalendarRef = calendarDatePickerRef.current as any
+      if (calendarDatePickerRef) {
+        const currentCalendarRef = calendarDatePickerRef as any
         currentCalendarRef.onInputFocus(evt)
       }
     },
-    [calendarDatePickerRef.current]
+    [calendarDatePickerRef]
   )
 
   return (
@@ -30,7 +30,7 @@ const DatePicker: React.FunctionComponent<CalendarProps> = ({ className, ...prop
       <FontAwesomeIcon icon={faCalendarEdit} />
       <span>Select Date</span>
       <CalendarDatePickerWrapper>
-        <CalendarDatePicker {...props} ref={calendarDatePickerRef} />
+        <CalendarDatePicker {...props} ref={setCalendarDatePickerRef} />
       </CalendarDatePickerWrapper>
     </CalandarDatePickerButton>
   )
