@@ -10,7 +10,6 @@ export interface ICalendarProps {
     }) => void;
     weekStartsOn?: DayOfWeek;
     shouldScrollSync?: boolean;
-    shouldShowDatePicker?: boolean;
     shouldShowTodayButton?: boolean;
 }
 declare const Calendar: React.FunctionComponent<ICalendarProps>;

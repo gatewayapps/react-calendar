@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 interface IHeaderProps {
   currentMonth: Date
   setCurrentMonth: (date: Date) => void
-  shouldShowDatePicker?: boolean
   shouldShowTodayButton?: boolean
 }
 
@@ -33,16 +32,14 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           onClick={() => props.setCurrentMonth(subMonths(props.currentMonth, 1))}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-        {props.shouldShowDatePicker && (
-          <DatePicker
-            className="nav-button"
-            dateFormat="mm/yy"
-            view="month"
-            yearRange="2015:2050"
-            onChange={({ value }) => props.setCurrentMonth(value as Date)}
-            yearNavigator
-          />
-        )}
+        <DatePicker
+          className="nav-button"
+          dateFormat="mm/yy"
+          view="month"
+          yearRange="2015:2050"
+          onChange={({ value }) => props.setCurrentMonth(value as Date)}
+          yearNavigator
+        />
         <button
           style={{ marginLeft: '5px' }}
           className="nav-button"
