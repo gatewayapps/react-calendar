@@ -1,3 +1,4 @@
+import '@fortawesome/fontawesome-pro/css/all.min.css'
 import React from 'react'
 import { Calendar } from '../src'
 
