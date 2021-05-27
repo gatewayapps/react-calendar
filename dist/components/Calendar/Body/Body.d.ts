@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DayOfWeek } from '../../../lib/DayOfWeek';
+import { IEvent } from '../../../lib/event';
 import { IEventSource } from '../../../lib/eventSource';
 interface IBodyProps {
     currentMonth: Date;
@@ -13,6 +14,9 @@ interface IBodyProps {
     weekStartsOn: DayOfWeek;
     dayHeaderComponent?: (props: {
         date: Date;
+    }) => JSX.Element;
+    eventComponent?: (props: {
+        event: IEvent;
     }) => JSX.Element;
 }
 declare const Body: React.FunctionComponent<IBodyProps>;

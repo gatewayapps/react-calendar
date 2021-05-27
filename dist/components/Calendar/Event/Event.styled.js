@@ -17,6 +17,7 @@ exports.StyledEvent = styled_components_1.default.div `
 `;
 exports.StyledEventLink = styled_components_1.default.a `
   border: none;
+  cursor: pointer;
   display: flex;
   flex: 1;
   overflow: hidden;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { DayOfWeek } from '../../lib/DayOfWeek';
 import { IEventSource } from '../../lib/eventSource';
+import { IEvent } from '../../lib/event';
 export interface ICalendarProps {
     defaultDate?: Date;
     events?: IEventSource[];
@@ -14,6 +15,9 @@ export interface ICalendarProps {
     shouldShowTodayButton?: boolean;
     dayHeaderComponent?: (props: {
         date: Date;
+    }) => JSX.Element;
+    eventComponent?: (props: {
+        event: IEvent;
     }) => JSX.Element;
 }
 declare const Calendar: React.FunctionComponent<ICalendarProps>;

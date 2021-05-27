@@ -10,6 +10,9 @@ interface IDayProps {
     dayHeaderComponent?: (props: {
         date: Date;
     }) => JSX.Element;
+    eventComponent?: (props: {
+        event: IEvent;
+    }) => JSX.Element;
 }
 declare const CalendarDay: React.FunctionComponent<IDayProps>;
 export default CalendarDay;

@@ -7,6 +7,7 @@ import {
 } from '../../../lib/calendarUtils'
 import { DayOfWeek } from '../../../lib/DayOfWeek'
 import Day from '../Day'
+import { IEvent } from '../../../lib/event'
 import { IEventSource } from '../../../lib/eventSource'
 import { BodyContainer, WeekdayHeader } from './Body.styled'
 
@@ -18,6 +19,7 @@ interface IBodyProps {
   numberOfWeeks: number
   weekStartsOn: DayOfWeek
   dayHeaderComponent?: (props: { date: Date }) => JSX.Element
+  eventComponent?: (props: { event: IEvent }) => JSX.Element
 }
 
 const Body: React.FunctionComponent<IBodyProps> = (props) => {
@@ -60,6 +62,7 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
             shouldScrollSync={props.shouldScrollSync}
             column={column}
             dayHeaderComponent={props.dayHeaderComponent}
+            eventComponent={props.eventComponent}
           />
         )
       })}

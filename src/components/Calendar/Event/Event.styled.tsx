@@ -13,6 +13,7 @@ export const StyledEvent = styled.div`
 
 export const StyledEventLink = styled.a`
   border: none;
+  cursor: pointer;
   display: flex;
   flex: 1;
   overflow: hidden;

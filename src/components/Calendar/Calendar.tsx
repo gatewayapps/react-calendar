@@ -8,6 +8,7 @@ import { defaultTheme } from '../../styles/theme'
 import Body from './Body'
 import { CalendarContainer } from './Calendar.styled'
 import Header from './Header'
+import { IEvent } from '../../lib/event'
 
 export interface ICalendarProps {
   defaultDate?: Date
@@ -18,9 +19,10 @@ export interface ICalendarProps {
   shouldShowDatePicker?: boolean
   shouldShowTodayButton?: boolean
   dayHeaderComponent?: (props: { date: Date }) => JSX.Element
+  eventComponent?: (props: { event: IEvent }) => JSX.Element
 }
 
-const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps) => {
+const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
   const [currentMonth, setCurrentMonth] = useState<Date>(
     startOfMonth(props.defaultDate || new Date())
   )
@@ -41,6 +43,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props: ICalendarProps
           weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}
           shouldScrollSync={props.shouldScrollSync}
           dayHeaderComponent={props.dayHeaderComponent}
+          eventComponent={props.eventComponent}
         />
       </CalendarContainer>
     </ThemeProvider>
