@@ -1,5 +1,6 @@
 import '@fortawesome/fontawesome-pro/js/all.min.js';
 import * as React from 'react';
-declare const DatePicker: React.FunctionComponent;
+import { CalendarProps } from 'primereact/calendar';
+declare const DatePicker: React.FunctionComponent<CalendarProps>;
 export default DatePicker;
 //# sourceMappingURL=DatePicker.d.ts.map
