@@ -14,6 +14,7 @@ export const DayHeader = styled.div`
   display: flex;
   font-size: 0.75em;
   font-weight: bold;
+  overflow: hidden;
   padding: 5px;
 `
 

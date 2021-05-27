@@ -12,6 +12,7 @@ exports.DayHeader = styled_components_1.default.div `
   display: flex;
   font-size: 0.75em;
   font-weight: bold;
+  overflow: hidden;
   padding: 5px;
 `;
 exports.DayContainer = styled_components_1.default.div `
