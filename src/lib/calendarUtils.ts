@@ -54,7 +54,6 @@ export function onDatePickerOpen(
   calendarDatePickerRef: React.RefObject<Calendar>
 ) {
   if (calendarDatePickerRef.current) {
-    console.log('test')
     const currentCalendarRef = calendarDatePickerRef.current as any
     currentCalendarRef.onInputFocus(event)
   }

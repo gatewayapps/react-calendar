@@ -42,7 +42,6 @@ function setupScrollSync(element, shouldScrollSync) {
 exports.setupScrollSync = setupScrollSync;
 function onDatePickerOpen(event, calendarDatePickerRef) {
     if (calendarDatePickerRef.current) {
-        console.log('test');
         const currentCalendarRef = calendarDatePickerRef.current;
         currentCalendarRef.onInputFocus(event);
     }
