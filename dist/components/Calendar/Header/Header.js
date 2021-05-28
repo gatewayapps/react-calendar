@@ -29,17 +29,21 @@ const pro_solid_svg_icons_1 = require("@fortawesome/pro-solid-svg-icons");
 const DatePicker_1 = __importDefault(require("../DatePicker"));
 const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
 const Header = (props) => {
+    const validRange = React.useMemo(() => { if (!props.validRange) {
+        return undefined;
+    } ; return { start: new Date(props.validRange.start), end: new Date(props.validRange.end) }; }, [props.validRange]);
+    console.log({ validRange });
     return (React.createElement(Header_styled_1.HeaderContainer, null,
         React.createElement("div", null),
-        React.createElement(Header_styled_1.Title, null, date_fns_1.format(props.currentMonth, 'MMMM YYYY')),
+        React.createElement(Header_styled_1.Title, null, date_fns_1.format(props.currentMonth, 'MMMM yyyy')),
         React.createElement(Header_styled_1.NavContainer, null,
-            props.shouldShowTodayButton && (React.createElement("button", { style: { marginRight: '10px' }, className: "nav-button", onClick: () => props.setCurrentMonth(new Date()) },
+            props.shouldShowTodayButton && (React.createElement("button", { disabled: date_fns_1.isSameMonth(props.currentMonth, new Date()), style: { marginRight: '10px' }, className: "nav-button", onClick: () => props.setCurrentMonth(new Date()) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faStopwatch }),
                 React.createElement("span", null, "Today"))),
-            React.createElement("button", { style: { marginRight: '5px' }, className: "nav-button", onClick: () => props.setCurrentMonth(date_fns_1.subMonths(props.currentMonth, 1)) },
+            React.createElement("button", { disabled: validRange ? !date_fns_1.isWithinInterval(date_fns_1.subMonths(props.currentMonth, 1), validRange) : false, style: { marginRight: '5px' }, className: "nav-button", onClick: () => props.setCurrentMonth(date_fns_1.subMonths(props.currentMonth, 1)) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faChevronLeft })),
-            props.shouldShowDatePicker && (React.createElement(DatePicker_1.default, { onChange: (evt) => props.setCurrentMonth(evt), showMonthYearPicker: true, showYearDropdown: true })),
-            React.createElement("button", { style: { marginLeft: '5px' }, className: "nav-button", onClick: () => props.setCurrentMonth(date_fns_1.addMonths(props.currentMonth, 1)) },
+            props.shouldShowDatePicker && (React.createElement(DatePicker_1.default, { onChange: (evt) => props.setCurrentMonth(evt), minDate: validRange === null || validRange === void 0 ? void 0 : validRange.start, maxDate: validRange === null || validRange === void 0 ? void 0 : validRange.end, showMonthYearPicker: true, showYearDropdown: true })),
+            React.createElement("button", { disabled: validRange ? !date_fns_1.isWithinInterval(date_fns_1.addMonths(props.currentMonth, 1), validRange) : false, style: { marginLeft: '5px' }, className: "nav-button", onClick: () => props.setCurrentMonth(date_fns_1.addMonths(props.currentMonth, 1)) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faChevronRight })))));
 };
 exports.default = Header;

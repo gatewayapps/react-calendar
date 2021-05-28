@@ -26,6 +26,11 @@ export const NavContainer = styled.div`
       border-color: ${(props) => props.theme.header.button.backgroundColorHover};
     }
 
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
     span {
       margin-left: 5px;
     }

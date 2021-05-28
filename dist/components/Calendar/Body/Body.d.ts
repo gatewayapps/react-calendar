@@ -1,3 +1,4 @@
+import { Interval } from 'date-fns';
 import * as React from 'react';
 import { DayOfWeek } from '../../../lib/DayOfWeek';
 import { IEvent } from '../../../lib/event';
@@ -18,6 +19,7 @@ interface IBodyProps {
     eventComponent?: (props: {
         event: IEvent;
     }) => JSX.Element;
+    validRange?: Interval;
 }
 declare const Body: React.FunctionComponent<IBodyProps>;
 export default Body;

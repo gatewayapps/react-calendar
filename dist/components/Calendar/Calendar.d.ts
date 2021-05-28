@@ -2,6 +2,7 @@ import React from 'react';
 import { DayOfWeek } from '../../lib/DayOfWeek';
 import { IEventSource } from '../../lib/eventSource';
 import { IEvent } from '../../lib/event';
+import { View } from '../../lib/view';
 export interface ICalendarProps {
     defaultDate?: Date;
     events?: IEventSource[];
@@ -19,6 +20,11 @@ export interface ICalendarProps {
     eventComponent?: (props: {
         event: IEvent;
     }) => JSX.Element;
+    views?: View[];
+    validRange?: {
+        start: Date | string;
+        end: Date | string;
+    };
 }
 declare const Calendar: React.FunctionComponent<ICalendarProps>;
 export default Calendar;

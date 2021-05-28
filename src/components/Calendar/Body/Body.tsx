@@ -1,4 +1,4 @@
-import { eachDay, format } from 'date-fns'
+import { Interval, eachDayOfInterval, format } from 'date-fns'
 import * as React from 'react'
 import {
   getCalendarEndDate,
@@ -10,6 +10,7 @@ import Day from '../Day'
 import { IEvent } from '../../../lib/event'
 import { IEventSource } from '../../../lib/eventSource'
 import { BodyContainer, WeekdayHeader } from './Body.styled'
+import { isWithinInterval } from 'date-fns'
 
 interface IBodyProps {
   currentMonth: Date
@@ -20,30 +21,44 @@ interface IBodyProps {
   weekStartsOn: DayOfWeek
   dayHeaderComponent?: (props: { date: Date }) => JSX.Element
   eventComponent?: (props: { event: IEvent }) => JSX.Element
+  validRange?: Interval
 }
 
 const Body: React.FunctionComponent<IBodyProps> = (props) => {
-  const startDate = React.useMemo(
-    () => getCalendarStartDate(props.currentMonth, props.weekStartsOn),
-    [props.currentMonth, props.weekStartsOn]
-  )
-  const endDate = React.useMemo(
+  const start = React.useMemo(() => getCalendarStartDate(props.currentMonth, props.weekStartsOn), [
+    props.currentMonth,
+    props.weekStartsOn
+  ])
+  const end = React.useMemo(
     () => getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn),
     [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]
   )
-  const allDays = React.useMemo(() => eachDay(startDate, endDate), [startDate, endDate])
+  const allDays = React.useMemo(() => eachDayOfInterval({ start, end }), [start, end])
+
+  const daysWithinValidRange = React.useMemo(() => {
+    if (!props.validRange || allDays.length <= 0) {
+      return true
+    }
+
+    const { start, end } = props.validRange
+    return allDays.every((day) => isWithinInterval(day, { start, end }))
+  }, [])
 
   React.useEffect(() => {
     if (props.getCalendarDates) {
-      props.getCalendarDates({ end: endDate, start: startDate })
+      props.getCalendarDates({ end, start })
     }
-  }, [props.getCalendarDates, startDate, endDate])
+  }, [props.getCalendarDates, start, end])
+
+  if (!daysWithinValidRange) {
+    return null
+  }
 
   return (
     <BodyContainer numberOfWeeks={props.numberOfWeeks}>
       {allDays
         .slice(0, 7)
-        .map((date) => format(date, 'dddd'))
+        .map((date) => format(date, 'EEEE'))
         .map((weekday, index) => (
           <WeekdayHeader key={weekday} row={1} column={index + 1}>
             {weekday}

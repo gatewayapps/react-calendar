@@ -27,19 +27,33 @@ const React = __importStar(require("react"));
 const calendarUtils_1 = require("../../../lib/calendarUtils");
 const Day_1 = __importDefault(require("../Day"));
 const Body_styled_1 = require("./Body.styled");
+const date_fns_2 = require("date-fns");
 const Body = (props) => {
-    const startDate = React.useMemo(() => calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn), [props.currentMonth, props.weekStartsOn]);
-    const endDate = React.useMemo(() => calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn), [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]);
-    const allDays = React.useMemo(() => date_fns_1.eachDay(startDate, endDate), [startDate, endDate]);
+    const start = React.useMemo(() => calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn), [
+        props.currentMonth,
+        props.weekStartsOn
+    ]);
+    const end = React.useMemo(() => calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn), [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]);
+    const allDays = React.useMemo(() => date_fns_1.eachDayOfInterval({ start, end }), [start, end]);
+    const daysWithinValidRange = React.useMemo(() => {
+        if (!props.validRange || allDays.length <= 0) {
+            return true;
+        }
+        const { start, end } = props.validRange;
+        return allDays.every((day) => date_fns_2.isWithinInterval(day, { start, end }));
+    }, []);
     React.useEffect(() => {
         if (props.getCalendarDates) {
-            props.getCalendarDates({ end: endDate, start: startDate });
+            props.getCalendarDates({ end, start });
         }
-    }, [props.getCalendarDates, startDate, endDate]);
+    }, [props.getCalendarDates, start, end]);
+    if (!daysWithinValidRange) {
+        return null;
+    }
     return (React.createElement(Body_styled_1.BodyContainer, { numberOfWeeks: props.numberOfWeeks },
         allDays
             .slice(0, 7)
-            .map((date) => date_fns_1.format(date, 'dddd'))
+            .map((date) => date_fns_1.format(date, 'EEEE'))
             .map((weekday, index) => (React.createElement(Body_styled_1.WeekdayHeader, { key: weekday, row: 1, column: index + 1 }, weekday))),
         allDays.map((date, index) => {
             const row = Math.floor(index / 7) + 2;
