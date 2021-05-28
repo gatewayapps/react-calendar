@@ -43,20 +43,8 @@ const Calendar = (props) => {
     }, [props.validRange]);
     return (react_1.default.createElement(styled_components_1.ThemeProvider, { theme: theme_1.defaultTheme },
         react_1.default.createElement(Calendar_styled_1.CalendarContainer, null,
-            react_1.default.createElement(Header_1.default, { currentMonth: currentMonth, setCurrentMonth: setCurrentMonth, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker, validRange: range }),
-            props.views && props.views.length > 0 ? (react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement(reactstrap_1.Nav, { tabs: true },
-                    react_1.default.createElement(reactstrap_1.NavItem, null,
-                        react_1.default.createElement(reactstrap_1.NavLink, { onClick: () => {
-                                setActiveTab(1);
-                            } }, "Standard View")),
-                    props.views.map(({ name }, i) => {
-                        ;
-                        react_1.default.createElement(reactstrap_1.NavItem, null,
-                            react_1.default.createElement(reactstrap_1.NavLink, { onClick: () => {
-                                    setActiveTab(i + 1);
-                                } }, name));
-                    })),
+            react_1.default.createElement(Header_1.default, { currentMonth: currentMonth, setCurrentMonth: setCurrentMonth, setActiveTab: setActiveTab, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker, validRange: range, views: props.views }),
+            props.views ? (react_1.default.createElement(react_1.default.Fragment, null,
                 react_1.default.createElement(reactstrap_1.TabContent, { activeTab: activeTab },
                     react_1.default.createElement(reactstrap_1.TabPane, { tabId: 1 },
                         react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })),

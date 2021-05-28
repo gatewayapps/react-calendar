@@ -1,6 +1,6 @@
 import { startOfMonth } from 'date-fns'
 import React, { useState } from 'react'
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
+import { TabContent, TabPane } from 'reactstrap'
 import { DEFAULT_NUMBER_OF_WEEKS, DEFAULT_WEEK_STARTS_ON } from '../../lib/constants'
 import { DayOfWeek } from '../../lib/DayOfWeek'
 import { IEventSource } from '../../lib/eventSource'
@@ -48,32 +48,14 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
         <Header
           currentMonth={currentMonth}
           setCurrentMonth={setCurrentMonth}
+          setActiveTab={setActiveTab}
           shouldShowTodayButton={props.shouldShowTodayButton}
           shouldShowDatePicker={props.shouldShowDatePicker}
           validRange={range}
+          views={props.views}
         />
-        {props.views && props.views.length > 0 ? (
+        {props.views ? (
           <>
-            <Nav tabs>
-              <NavItem>
-                <NavLink
-                  onClick={(): void => {
-                    setActiveTab(1)
-                  }}>
-                  Standard View
-                </NavLink>
-              </NavItem>
-              {props.views.map(({ name }, i) => {
-                ;<NavItem>
-                  <NavLink
-                    onClick={(): void => {
-                      setActiveTab(i + 1)
-                    }}>
-                    {name}
-                  </NavLink>
-                </NavItem>
-              })}
-            </Nav>
             <TabContent activeTab={activeTab}>
               <TabPane tabId={1}>
                 <Body

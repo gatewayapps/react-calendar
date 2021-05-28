@@ -5,4 +5,10 @@ export const CalendarContainer = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
+
+  .tab-content,
+  .tab-pane {
+    display: flex;
+    flex: 1;
+  }
 `

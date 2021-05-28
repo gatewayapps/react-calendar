@@ -25,6 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const date_fns_1 = require("date-fns");
 const React = __importStar(require("react"));
 const Header_styled_1 = require("./Header.styled");
+const reactstrap_1 = require("reactstrap");
 const pro_solid_svg_icons_1 = require("@fortawesome/pro-solid-svg-icons");
 const DatePicker_1 = __importDefault(require("../DatePicker"));
 const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
@@ -34,7 +35,15 @@ const Header = (props) => {
     } ; return { start: new Date(props.validRange.start), end: new Date(props.validRange.end) }; }, [props.validRange]);
     console.log({ validRange });
     return (React.createElement(Header_styled_1.HeaderContainer, null,
-        React.createElement("div", null),
+        props.views ? React.createElement(reactstrap_1.Nav, { tabs: true },
+            React.createElement(reactstrap_1.NavItem, null,
+                React.createElement(reactstrap_1.NavLink, { onClick: () => {
+                        props.setActiveTab(1);
+                    } }, "Standard View")),
+            props.views.map(({ name }, i) => (React.createElement(reactstrap_1.NavItem, null,
+                React.createElement(reactstrap_1.NavLink, { onClick: () => {
+                        props.setActiveTab(i + 1);
+                    } }, name))))) : React.createElement("div", null),
         React.createElement(Header_styled_1.Title, null, date_fns_1.format(props.currentMonth, 'MMMM yyyy')),
         React.createElement(Header_styled_1.NavContainer, null,
             props.shouldShowTodayButton && (React.createElement("button", { disabled: date_fns_1.isSameMonth(props.currentMonth, new Date()), style: { marginRight: '10px' }, className: "nav-button", onClick: () => props.setCurrentMonth(new Date()) },

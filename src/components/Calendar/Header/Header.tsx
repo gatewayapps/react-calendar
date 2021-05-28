@@ -1,16 +1,20 @@
 import { Interval, addMonths, format, isSameMonth, isWithinInterval, subMonths } from 'date-fns'
 import * as React from 'react'
 import { HeaderContainer, NavContainer, Title } from './Header.styled'
+import { Nav, NavItem, NavLink } from 'reactstrap'
 import { faChevronLeft, faChevronRight, faStopwatch } from '@fortawesome/pro-solid-svg-icons'
 import DatePicker from '../DatePicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { View } from '../../../lib/view'
 
 interface IHeaderProps {
   currentMonth: Date
   setCurrentMonth: (date: Date) => void
+  setActiveTab: (tab: number) => void
   shouldShowTodayButton?: boolean
   shouldShowDatePicker?: boolean
   validRange?: Interval
+  views?: View[]
 }
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
@@ -19,7 +23,26 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 
   return (
     <HeaderContainer>
-      <div />
+      {props.views ? <Nav tabs>
+              <NavItem>
+                <NavLink
+                  onClick={(): void => {
+                    props.setActiveTab(1)
+                  }}>
+                  Standard View
+                </NavLink>
+              </NavItem>
+              {props.views.map(({ name }, i) => (
+                <NavItem>
+                  <NavLink
+                    onClick={(): void => {
+                      props.setActiveTab(i + 1)
+                    }}>
+                    {name}
+                  </NavLink>
+                </NavItem>
+              ))}
+            </Nav> : <div />}
       <Title>{format(props.currentMonth, 'MMMM yyyy')}</Title>
       <NavContainer>
         {props.shouldShowTodayButton && (
