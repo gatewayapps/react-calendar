@@ -19,7 +19,6 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const validRange = React.useMemo(() => { if(!props.validRange) { return undefined }; return { start: new Date(props.validRange.start), end: new Date(props.validRange.end) } }, [props.validRange])
-  console.log({ validRange })
 
   return (
     <HeaderContainer>
@@ -27,13 +26,13 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               <NavItem>
                 <NavLink
                   onClick={(): void => {
-                    props.setActiveTab(1)
+                    props.setActiveTab(0)
                   }}>
                   Standard View
                 </NavLink>
               </NavItem>
               {props.views.map(({ name }, i) => (
-                <NavItem>
+                <NavItem key={i}>
                   <NavLink
                     onClick={(): void => {
                       props.setActiveTab(i + 1)

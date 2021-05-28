@@ -33,14 +33,13 @@ const Header = (props) => {
     const validRange = React.useMemo(() => { if (!props.validRange) {
         return undefined;
     } ; return { start: new Date(props.validRange.start), end: new Date(props.validRange.end) }; }, [props.validRange]);
-    console.log({ validRange });
     return (React.createElement(Header_styled_1.HeaderContainer, null,
         props.views ? React.createElement(reactstrap_1.Nav, { tabs: true },
             React.createElement(reactstrap_1.NavItem, null,
                 React.createElement(reactstrap_1.NavLink, { onClick: () => {
-                        props.setActiveTab(1);
+                        props.setActiveTab(0);
                     } }, "Standard View")),
-            props.views.map(({ name }, i) => (React.createElement(reactstrap_1.NavItem, null,
+            props.views.map(({ name }, i) => (React.createElement(reactstrap_1.NavItem, { key: i },
                 React.createElement(reactstrap_1.NavLink, { onClick: () => {
                         props.setActiveTab(i + 1);
                     } }, name))))) : React.createElement("div", null),

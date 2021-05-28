@@ -32,7 +32,7 @@ const Body_1 = __importDefault(require("./Body"));
 const Calendar_styled_1 = require("./Calendar.styled");
 const Header_1 = __importDefault(require("./Header"));
 const Calendar = (props) => {
-    const [activeTab, setActiveTab] = react_1.default.useState(1);
+    const [activeTab, setActiveTab] = react_1.default.useState(0);
     const [currentMonth, setCurrentMonth] = react_1.useState(date_fns_1.startOfMonth(props.defaultDate || new Date()));
     const range = react_1.default.useMemo(() => {
         if (!props.validRange) {
@@ -46,9 +46,9 @@ const Calendar = (props) => {
             react_1.default.createElement(Header_1.default, { currentMonth: currentMonth, setCurrentMonth: setCurrentMonth, setActiveTab: setActiveTab, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker, validRange: range, views: props.views }),
             props.views ? (react_1.default.createElement(react_1.default.Fragment, null,
                 react_1.default.createElement(reactstrap_1.TabContent, { activeTab: activeTab },
-                    react_1.default.createElement(reactstrap_1.TabPane, { tabId: 1 },
+                    react_1.default.createElement(reactstrap_1.TabPane, { tabId: 0 },
                         react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })),
-                    props.views.map(({ component }, i) => (react_1.default.createElement(reactstrap_1.TabPane, { tabId: i + 1 }, props.events && range ? component({ events: props.events, range }) : null)))))) : (react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })))));
+                    props.views.map(({ component }, i) => (react_1.default.createElement(reactstrap_1.TabPane, { key: i, tabId: i + 1 }, props.events && range ? component({ events: props.events, range }) : null)))))) : (react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })))));
 };
 exports.default = Calendar;
 //# sourceMappingURL=Calendar.js.map

@@ -28,7 +28,7 @@ export interface ICalendarProps {
 }
 
 const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
-  const [activeTab, setActiveTab] = React.useState<number>(1)
+  const [activeTab, setActiveTab] = React.useState<number>(0)
   const [currentMonth, setCurrentMonth] = useState<Date>(
     startOfMonth(props.defaultDate || new Date())
   )
@@ -57,7 +57,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
         {props.views ? (
           <>
             <TabContent activeTab={activeTab}>
-              <TabPane tabId={1}>
+              <TabPane tabId={0}>
                 <Body
                   currentMonth={currentMonth}
                   events={props.events}
@@ -71,7 +71,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
                 />
               </TabPane>
               {props.views.map(({ component }, i) => (
-                <TabPane tabId={i + 1}>
+                <TabPane key={i} tabId={i + 1}>
                   {props.events && range ? component({ events: props.events, range }) : null}
                 </TabPane>
               ))}

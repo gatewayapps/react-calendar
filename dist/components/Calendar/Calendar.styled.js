@@ -11,10 +11,18 @@ exports.CalendarContainer = styled_components_1.default.div `
   width: 100%;
   height: 100%;
 
-  .tab-content,
-  .tab-pane {
+  .tab-content {
     display: flex;
     flex: 1;
+  }
+
+  .tab-pane {
+    display: none;
+    flex: 1;
+
+    &.active {
+      display: flex;
+    }
   }
 `;
 //# sourceMappingURL=Calendar.styled.js.map
