@@ -10,7 +10,7 @@ import Body from './Body'
 import { CalendarContainer } from './Calendar.styled'
 import Header from './Header'
 import { IEvent } from '../../lib/event'
-import { Interval } from 'date-fns'
+import { Interval, parseISO } from 'date-fns'
 import { View } from '../../lib/view'
 
 export interface ICalendarProps {
@@ -39,7 +39,10 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
     }
 
     const { start, end } = props.validRange
-    return { start: new Date(start), end: new Date(end) }
+    return {
+      start: typeof start === 'string' ? parseISO(start) : start,
+      end: typeof end === 'string' ? parseISO(end) : end
+    }
   }, [props.validRange])
 
   return (

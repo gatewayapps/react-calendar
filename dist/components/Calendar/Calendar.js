@@ -31,6 +31,7 @@ const theme_1 = require("../../styles/theme");
 const Body_1 = __importDefault(require("./Body"));
 const Calendar_styled_1 = require("./Calendar.styled");
 const Header_1 = __importDefault(require("./Header"));
+const date_fns_2 = require("date-fns");
 const Calendar = (props) => {
     const [activeTab, setActiveTab] = react_1.default.useState(0);
     const [currentMonth, setCurrentMonth] = react_1.useState(date_fns_1.startOfMonth(props.defaultDate || new Date()));
@@ -39,7 +40,10 @@ const Calendar = (props) => {
             return undefined;
         }
         const { start, end } = props.validRange;
-        return { start: new Date(start), end: new Date(end) };
+        return {
+            start: typeof start === 'string' ? date_fns_2.parseISO(start) : start,
+            end: typeof end === 'string' ? date_fns_2.parseISO(end) : end
+        };
     }, [props.validRange]);
     return (react_1.default.createElement(styled_components_1.ThemeProvider, { theme: theme_1.defaultTheme },
         react_1.default.createElement(Calendar_styled_1.CalendarContainer, null,
