@@ -27,7 +27,6 @@ const React = __importStar(require("react"));
 const calendarUtils_1 = require("../../../lib/calendarUtils");
 const Day_1 = __importDefault(require("../Day"));
 const Body_styled_1 = require("./Body.styled");
-const date_fns_2 = require("date-fns");
 const Body = (props) => {
     const start = React.useMemo(() => calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn), [
         props.currentMonth,
@@ -40,7 +39,7 @@ const Body = (props) => {
             return true;
         }
         const { start, end } = props.validRange;
-        return allDays.every((day) => date_fns_2.isWithinInterval(day, { start, end }));
+        return allDays.every((day) => date_fns_1.isWithinInterval(day, { start, end }));
     }, []);
     React.useEffect(() => {
         if (props.getCalendarDates) {

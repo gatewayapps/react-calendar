@@ -4,7 +4,6 @@ exports.setupScrollSync = exports.getEventsForDay = exports.getCalendarEndDate =
 const date_fns_1 = require("date-fns");
 const DayOfWeek_1 = require("./DayOfWeek");
 const throttle_1 = require("./throttle");
-const date_fns_2 = require("date-fns");
 function getCalendarStartDate(date, weekStartsOn = DayOfWeek_1.DayOfWeek.Sunday) {
     return date_fns_1.startOfWeek(date_fns_1.startOfMonth(date), { weekStartsOn });
 }
@@ -16,7 +15,7 @@ function getCalendarEndDate(date, numberOfWeeks, weekStartsOn = DayOfWeek_1.DayO
 exports.getCalendarEndDate = getCalendarEndDate;
 function getEventsForDay(date, events) {
     return events
-        ? events.flatMap(({ events }) => events).filter((event) => date_fns_2.isSameDay(event.date, date))
+        ? events.flatMap(({ events }) => events).filter((event) => date_fns_1.isSameDay(event.date, date))
         : [];
 }
 exports.getEventsForDay = getEventsForDay;

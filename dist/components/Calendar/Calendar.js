@@ -33,8 +33,9 @@ const Calendar_styled_1 = require("./Calendar.styled");
 const Header_1 = __importDefault(require("./Header"));
 const date_fns_2 = require("date-fns");
 const Calendar = (props) => {
+    var _a;
     const [activeTab, setActiveTab] = react_1.default.useState(0);
-    const [currentMonth, setCurrentMonth] = react_1.useState(date_fns_1.startOfMonth(props.defaultDate || new Date()));
+    const [currentMonth, setCurrentMonth] = react_1.useState(date_fns_1.startOfMonth((_a = props.defaultDate) !== null && _a !== void 0 ? _a : new Date()));
     const range = react_1.default.useMemo(() => {
         if (!props.validRange) {
             return undefined;
@@ -52,7 +53,7 @@ const Calendar = (props) => {
                 react_1.default.createElement(reactstrap_1.TabContent, { activeTab: activeTab },
                     react_1.default.createElement(reactstrap_1.TabPane, { tabId: 0 },
                         react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })),
-                    props.views.map(({ component }, i) => (react_1.default.createElement(reactstrap_1.TabPane, { key: i, tabId: i + 1 }, props.events && range ? component({ events: props.events, range }) : null)))))) : (react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })))));
+                    props.views.map(({ component }, i) => (react_1.default.createElement(reactstrap_1.TabPane, { key: i, tabId: i + 1 }, component({ events: props.events, range }))))))) : (react_1.default.createElement(Body_1.default, { currentMonth: currentMonth, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: constants_1.DEFAULT_NUMBER_OF_WEEKS, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })))));
 };
 exports.default = Calendar;
 //# sourceMappingURL=Calendar.js.map
