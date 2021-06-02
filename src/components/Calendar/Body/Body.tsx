@@ -1,4 +1,4 @@
-import { Interval, eachDayOfInterval, format } from 'date-fns'
+import { Interval, eachDayOfInterval, format, isWithinInterval } from 'date-fns'
 import * as React from 'react'
 import {
   getCalendarEndDate,
@@ -10,7 +10,6 @@ import Day from '../Day'
 import { IEvent } from '../../../lib/event'
 import { IEventSource } from '../../../lib/eventSource'
 import { BodyContainer, WeekdayHeader } from './Body.styled'
-import { isWithinInterval } from 'date-fns'
 
 interface IBodyProps {
   currentMonth: Date

@@ -30,7 +30,7 @@ export interface ICalendarProps {
 const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
   const [activeTab, setActiveTab] = React.useState<number>(0)
   const [currentMonth, setCurrentMonth] = useState<Date>(
-    startOfMonth(props.defaultDate || new Date())
+    startOfMonth(props.defaultDate ?? new Date())
   )
 
   const range: Interval | undefined = React.useMemo(() => {
@@ -75,7 +75,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
               </TabPane>
               {props.views.map(({ component }, i) => (
                 <TabPane key={i} tabId={i + 1}>
-                  {props.events && range ? component({ events: props.events, range }) : null}
+                  {component({ events: props.events, range })}
                 </TabPane>
               ))}
             </TabContent>

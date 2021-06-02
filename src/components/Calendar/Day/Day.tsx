@@ -52,8 +52,8 @@ const CalendarDay: React.FunctionComponent<IDayProps> = ({
         {dayHeaderComponent ? dayHeaderComponent({ date: props.date }) : props.date.getDate()}
       </DayHeader>
       <EventsContainer ref={setEventContainerRef}>
-        {props.events.map((event) => {
-          return eventComponent ? eventComponent({ event }) : <Event {...event} key={event.id} />
+        {props.events.map((event, i) => {
+          return eventComponent ? eventComponent({ event }) : <Event {...event} key={event.id ?? `${event.date.toISOString()}-${i}`} />
         })}
       </EventsContainer>
     </DayContainer>

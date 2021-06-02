@@ -1,9 +1,8 @@
-import { addWeeks, endOfWeek, startOfDay, startOfMonth, startOfWeek } from 'date-fns'
+import { addWeeks, endOfWeek, isSameDay, startOfDay, startOfMonth, startOfWeek } from 'date-fns'
 import { DayOfWeek } from './DayOfWeek'
 import { IEvent } from './event'
 import { IEventSource } from './eventSource'
 import { throttle } from './throttle'
-import { isSameDay } from 'date-fns'
 
 export function getCalendarStartDate(date: Date, weekStartsOn: DayOfWeek = DayOfWeek.Sunday): Date {
   return startOfWeek(startOfMonth(date), { weekStartsOn })
