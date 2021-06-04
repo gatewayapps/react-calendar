@@ -1,18 +1,16 @@
-import { Interval, eachDayOfInterval, format, isWithinInterval } from 'date-fns'
 import * as React from 'react'
-import {
-  getCalendarEndDate,
-  getCalendarStartDate,
-  getEventsForDay
-} from '../../../lib/calendarUtils'
-import { DayOfWeek } from '../../../lib/DayOfWeek'
+import { BodyContainer, WeekdayHeader } from './Body.styled'
+import { Interval, eachDayOfInterval, format, isWithinInterval } from 'date-fns'
 import Day from '../Day'
+import { DayOfWeek } from '../../../lib/DayOfWeek'
 import { IEvent } from '../../../lib/event'
 import { IEventSource } from '../../../lib/eventSource'
-import { BodyContainer, WeekdayHeader } from './Body.styled'
+import { getEventsForDay } from '../../../lib/calendarUtils'
 
 interface IBodyProps {
-  currentMonth: Date
+  currentSpan: Date
+  start: Date
+  end: Date
   events?: IEventSource[]
   getCalendarDates?: (values: { start: Date; end: Date }) => void
   shouldScrollSync?: boolean
@@ -23,15 +21,7 @@ interface IBodyProps {
   validRange?: Interval
 }
 
-const Body: React.FunctionComponent<IBodyProps> = (props) => {
-  const start = React.useMemo(() => getCalendarStartDate(props.currentMonth, props.weekStartsOn), [
-    props.currentMonth,
-    props.weekStartsOn
-  ])
-  const end = React.useMemo(
-    () => getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn),
-    [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]
-  )
+const Body: React.FunctionComponent<IBodyProps> = ({ start, end, ...props }) => {
   const allDays = React.useMemo(() => eachDayOfInterval({ start, end }), [start, end])
 
   const daysWithinValidRange = React.useMemo(() => {
@@ -69,7 +59,7 @@ const Body: React.FunctionComponent<IBodyProps> = (props) => {
         return (
           <Day
             key={date.toISOString()}
-            currentMonth={props.currentMonth}
+            currentMonth={props.currentSpan}
             date={date}
             events={getEventsForDay(date, props.events)}
             row={row}

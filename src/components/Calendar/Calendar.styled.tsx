@@ -20,3 +20,9 @@ export const CalendarContainer = styled.div`
     }
   }
 `
+
+export const CalendarBodyContainer = styled.div`
+  display: flex;
+  flex: 1;
+  position: relative;
+`

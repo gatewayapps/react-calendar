@@ -4,8 +4,11 @@ import { Interval } from 'date-fns';
 export interface View {
     name: string;
     component: (props: {
+        startDate: Date;
+        endDate: Date;
         events?: IEventSource[];
-        range?: Interval;
+        validRange?: Interval;
     }) => JSX.Element;
+    weeks?: number;
 }
 //# sourceMappingURL=view.d.ts.map

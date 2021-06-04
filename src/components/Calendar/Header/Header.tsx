@@ -1,16 +1,20 @@
-import { Interval, addMonths, format, isSameMonth, isWithinInterval, subMonths } from 'date-fns'
+import { Interval, addWeeks, addMonths, format, isSameMonth, isWithinInterval, subWeeks } from 'date-fns'
 import * as React from 'react'
 import { HeaderContainer, NavContainer, Title } from './Header.styled'
 import { Nav, NavItem, NavLink } from 'reactstrap'
 import { faChevronLeft, faChevronRight, faStopwatch } from '@fortawesome/pro-solid-svg-icons'
+import { DEFAULT_NUMBER_OF_WEEKS } from '../../../lib/constants'
 import DatePicker from '../DatePicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { View } from '../../../lib/view'
+import subMonths from 'date-fns/subMonths'
 
 interface IHeaderProps {
-  currentMonth: Date
-  setCurrentMonth: (date: Date) => void
+  currentSpan: Date
+  numberOfWeeks: number
+  setCurrentSpan: (date: Date) => void
   setActiveTab: (tab: number) => void
+  setNumOfWeeks: (weeks: number) => void
   shouldShowTodayButton?: boolean
   shouldShowDatePicker?: boolean
   validRange?: Interval
@@ -20,6 +24,22 @@ interface IHeaderProps {
 const Header: React.FunctionComponent<IHeaderProps> = (props) => {
   const validRange = React.useMemo(() => { if(!props.validRange) { return undefined }; return { start: new Date(props.validRange.start), end: new Date(props.validRange.end) } }, [props.validRange])
 
+  const navigatePrevspan = React.useMemo(() => {
+    if(props.numberOfWeeks === 6) {
+      return subMonths(props.currentSpan, 1)
+    }
+    
+    return subWeeks(props.currentSpan, props.numberOfWeeks)
+  },[props.currentSpan, props.numberOfWeeks])
+
+  const navigateNextspan = React.useMemo(() => {
+    if(props.numberOfWeeks === 6) {
+      return addMonths(props.currentSpan, 1)
+    }
+
+    return addWeeks(props.currentSpan, props.numberOfWeeks)
+  },[props.currentSpan, props.numberOfWeeks])
+
   return (
     <HeaderContainer>
       {props.views ? <Nav tabs>
@@ -27,43 +47,45 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                 <NavLink
                   onClick={(): void => {
                     props.setActiveTab(0)
+                    props.setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
                   }}>
                   Standard View
                 </NavLink>
               </NavItem>
-              {props.views.map(({ name }, i) => (
+              {props.views.map(({ name, weeks }, i) => (
                 <NavItem key={i}>
                   <NavLink
                     onClick={(): void => {
                       props.setActiveTab(i + 1)
+                      props.setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
                     }}>
                     {name}
                   </NavLink>
                 </NavItem>
               ))}
             </Nav> : <div />}
-      <Title>{format(props.currentMonth, 'MMMM yyyy')}</Title>
+      <Title>{format(props.currentSpan, 'MMMM yyyy')}</Title>
       <NavContainer>
         {props.shouldShowTodayButton && (
           <button
-            disabled={isSameMonth(props.currentMonth, new Date())}
+            disabled={isSameMonth(props.currentSpan, new Date())}
             style={{ marginRight: '10px' }}
             className="nav-button"
-            onClick={() => props.setCurrentMonth(new Date())}>
+            onClick={() => props.setCurrentSpan(new Date())}>
             <FontAwesomeIcon icon={faStopwatch} />
             <span>Today</span>
           </button>
         )}
         <button
-          disabled={validRange ? !isWithinInterval(subMonths(props.currentMonth, 1), validRange) : false}
+          disabled={validRange ? !isWithinInterval(navigatePrevspan, validRange) : false}
           style={{ marginRight: '5px' }}
           className="nav-button"
-          onClick={() => props.setCurrentMonth(subMonths(props.currentMonth, 1))}>
+          onClick={() => props.setCurrentSpan(navigatePrevspan)}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         {props.shouldShowDatePicker && (
           <DatePicker
-            onChange={(evt) => props.setCurrentMonth(evt as Date)}
+            onChange={(evt) => props.setCurrentSpan(evt as Date)}
             minDate={validRange?.start}
             maxDate={validRange?.end}
             showMonthYearPicker
@@ -71,10 +93,10 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
           />
         )}
         <button
-          disabled={validRange ? !isWithinInterval(addMonths(props.currentMonth, 1), validRange) : false}
+          disabled={validRange ? !isWithinInterval(navigateNextspan, validRange) : false}
           style={{ marginLeft: '5px' }}
           className="nav-button"
-          onClick={() => props.setCurrentMonth(addMonths(props.currentMonth, 1))}>
+          onClick={() => props.setCurrentSpan(navigateNextspan)}>
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </NavContainer>

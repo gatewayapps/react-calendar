@@ -1,10 +1,12 @@
-import { Interval } from 'date-fns';
 import * as React from 'react';
+import { Interval } from 'date-fns';
 import { DayOfWeek } from '../../../lib/DayOfWeek';
 import { IEvent } from '../../../lib/event';
 import { IEventSource } from '../../../lib/eventSource';
 interface IBodyProps {
-    currentMonth: Date;
+    currentSpan: Date;
+    start: Date;
+    end: Date;
     events?: IEventSource[];
     getCalendarDates?: (values: {
         start: Date;

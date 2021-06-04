@@ -4,8 +4,12 @@ import { IEvent } from './event'
 import { IEventSource } from './eventSource'
 import { throttle } from './throttle'
 
-export function getCalendarStartDate(date: Date, weekStartsOn: DayOfWeek = DayOfWeek.Sunday): Date {
-  return startOfWeek(startOfMonth(date), { weekStartsOn })
+export function getCalendarStartDate(
+  date: Date,
+  weekStartsOn: DayOfWeek = DayOfWeek.Sunday,
+  numberOfWeeks: number
+): Date {
+  return startOfWeek(numberOfWeeks === 6 ? startOfMonth(date) : date, { weekStartsOn })
 }
 
 export function getCalendarEndDate(
@@ -13,7 +17,7 @@ export function getCalendarEndDate(
   numberOfWeeks: number,
   weekStartsOn: DayOfWeek = DayOfWeek.Sunday
 ): Date {
-  const startDate = getCalendarStartDate(date, weekStartsOn)
+  const startDate = getCalendarStartDate(date, weekStartsOn, numberOfWeeks)
   return startOfDay(endOfWeek(addWeeks(startDate, numberOfWeeks - 1), { weekStartsOn }))
 }
 

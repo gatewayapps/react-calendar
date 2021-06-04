@@ -18,21 +18,28 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const date_fns_1 = require("date-fns");
 const React = __importStar(require("react"));
-const calendarUtils_1 = require("../../../lib/calendarUtils");
-const Day_1 = __importDefault(require("../Day"));
 const Body_styled_1 = require("./Body.styled");
-const Body = (props) => {
-    const start = React.useMemo(() => calendarUtils_1.getCalendarStartDate(props.currentMonth, props.weekStartsOn), [
-        props.currentMonth,
-        props.weekStartsOn
-    ]);
-    const end = React.useMemo(() => calendarUtils_1.getCalendarEndDate(props.currentMonth, props.numberOfWeeks, props.weekStartsOn), [props.currentMonth, props.numberOfWeeks, props.weekStartsOn]);
+const date_fns_1 = require("date-fns");
+const Day_1 = __importDefault(require("../Day"));
+const calendarUtils_1 = require("../../../lib/calendarUtils");
+const Body = (_a) => {
+    var { start, end } = _a, props = __rest(_a, ["start", "end"]);
     const allDays = React.useMemo(() => date_fns_1.eachDayOfInterval({ start, end }), [start, end]);
     const daysWithinValidRange = React.useMemo(() => {
         if (!props.validRange || allDays.length <= 0) {
@@ -57,7 +64,7 @@ const Body = (props) => {
         allDays.map((date, index) => {
             const row = Math.floor(index / 7) + 2;
             const column = (index % 7) + 1;
-            return (React.createElement(Day_1.default, { key: date.toISOString(), currentMonth: props.currentMonth, date: date, events: calendarUtils_1.getEventsForDay(date, props.events), row: row, shouldScrollSync: props.shouldScrollSync, column: column, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent }));
+            return (React.createElement(Day_1.default, { key: date.toISOString(), currentMonth: props.currentSpan, date: date, events: calendarUtils_1.getEventsForDay(date, props.events), row: row, shouldScrollSync: props.shouldScrollSync, column: column, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent }));
         })));
 };
 exports.default = Body;

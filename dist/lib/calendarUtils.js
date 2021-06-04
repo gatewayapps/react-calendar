@@ -4,12 +4,12 @@ exports.setupScrollSync = exports.getEventsForDay = exports.getCalendarEndDate =
 const date_fns_1 = require("date-fns");
 const DayOfWeek_1 = require("./DayOfWeek");
 const throttle_1 = require("./throttle");
-function getCalendarStartDate(date, weekStartsOn = DayOfWeek_1.DayOfWeek.Sunday) {
-    return date_fns_1.startOfWeek(date_fns_1.startOfMonth(date), { weekStartsOn });
+function getCalendarStartDate(date, weekStartsOn = DayOfWeek_1.DayOfWeek.Sunday, numberOfWeeks) {
+    return date_fns_1.startOfWeek(numberOfWeeks === 6 ? date_fns_1.startOfMonth(date) : date, { weekStartsOn });
 }
 exports.getCalendarStartDate = getCalendarStartDate;
 function getCalendarEndDate(date, numberOfWeeks, weekStartsOn = DayOfWeek_1.DayOfWeek.Sunday) {
-    const startDate = getCalendarStartDate(date, weekStartsOn);
+    const startDate = getCalendarStartDate(date, weekStartsOn, numberOfWeeks);
     return date_fns_1.startOfDay(date_fns_1.endOfWeek(date_fns_1.addWeeks(startDate, numberOfWeeks - 1), { weekStartsOn }));
 }
 exports.getCalendarEndDate = getCalendarEndDate;
