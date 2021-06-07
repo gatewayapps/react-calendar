@@ -65,9 +65,9 @@ const Calendar = (props) => {
             react_1.default.createElement(Calendar_styled_1.CalendarBodyContainer, null,
                 props.loadingComponent,
                 props.views ? (react_1.default.createElement(react_1.default.Fragment, null,
-                    react_1.default.createElement(react_tabs_1.TabPanel, null,
+                    react_1.default.createElement(react_tabs_1.TabPanel, { key: 0, tabIndex: 0 },
                         react_1.default.createElement(Body_1.default, { currentSpan: currentSpan, start: start, end: end, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: numOfWeeks, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })),
-                    props.views.map(({ component }, i) => (react_1.default.createElement(react_tabs_1.TabPanel, { key: i }, component({ startDate: start, endDate: end, events: props.events, validRange: range })))))) : (react_1.default.createElement(Body_1.default, { currentSpan: currentSpan, start: start, end: end, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: numOfWeeks, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range }))))));
+                    props.views.map(({ component }, i) => (react_1.default.createElement(react_tabs_1.TabPanel, { key: i + 1, tabIndex: i + 1 }, component({ startDate: start, endDate: end, events: props.events, validRange: range })))))) : (react_1.default.createElement(Body_1.default, { currentSpan: currentSpan, start: start, end: end, events: props.events, getCalendarDates: props.getCalendarDates, numberOfWeeks: numOfWeeks, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range }))))));
 };
 exports.default = Calendar;
 //# sourceMappingURL=Calendar.js.map

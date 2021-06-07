@@ -49,11 +49,11 @@ const Header = (props) => {
     }, [props.currentSpan, props.numberOfWeeks]);
     return (React.createElement(Header_styled_1.HeaderContainer, null,
         props.views ? React.createElement(react_tabs_1.TabList, null,
-            React.createElement(react_tabs_1.Tab, { onClick: () => {
+            React.createElement(react_tabs_1.Tab, { key: 0, onClick: () => {
                     props.setActiveTab(0);
                     props.setNumOfWeeks(constants_1.DEFAULT_NUMBER_OF_WEEKS);
                 } }, "Standard View"),
-            props.views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i, onClick: () => {
+            props.views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i + 1, onClick: () => {
                     props.setActiveTab(i + 1);
                     props.setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
                 } }, name)))) : React.createElement("div", null),

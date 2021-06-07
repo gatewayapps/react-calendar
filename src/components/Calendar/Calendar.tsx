@@ -87,7 +87,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
         {props.loadingComponent}
         {props.views ? (
           <>
-            <TabPanel>
+            <TabPanel key={0} tabIndex={0}>
                 <Body
                   currentSpan={currentSpan}
                   start={start}
@@ -103,7 +103,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
                 />
               </TabPanel>
               {props.views.map(({ component }, i) => (
-                <TabPanel key={i}>
+                <TabPanel key={i + 1} tabIndex={i + 1}>
                   {component({ startDate: start, endDate: end, events: props.events, validRange: range })}
                 </TabPanel>
               ))}

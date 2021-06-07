@@ -44,6 +44,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
     <HeaderContainer>
       {props.views ? <TabList>
                 <Tab
+                  key={0}
                   onClick={(): void => {
                     props.setActiveTab(0)
                     props.setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
@@ -52,7 +53,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                 </Tab>
               {props.views.map(({ name, weeks }, i) => (
                   <Tab
-                    key={i}
+                    key={i + 1}
                     onClick={(): void => {
                       props.setActiveTab(i + 1)
                       props.setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
