@@ -51,7 +51,7 @@ const Body: React.FunctionComponent<IBodyProps> = ({ start, end, ...props }) => 
         const column = (index % 7) + 1
         return (
           <Day
-            key={date.toISOString()}
+            key={`${date.toISOString()}-${index}`}
             currentMonth={props.currentSpan}
             date={date}
             events={getEventsForDay(date, props.events)}
