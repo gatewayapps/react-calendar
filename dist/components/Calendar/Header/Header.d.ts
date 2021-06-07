@@ -4,6 +4,7 @@ import { View } from '../../../lib/view';
 interface IHeaderProps {
     currentSpan: Date;
     numberOfWeeks: number;
+    setActiveTab: (index: number) => void;
     setCurrentSpan: (date: Date) => void;
     setNumOfWeeks: (weeks: number) => void;
     shouldShowTodayButton?: boolean;
