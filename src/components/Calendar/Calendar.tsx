@@ -1,4 +1,3 @@
-import 'react-tabs/style/react-tabs.css';
 import { startOfMonth } from 'date-fns'
 import React, { useState } from 'react'
 import { CalendarContainer, CalendarBodyContainer } from './Calendar.styled'

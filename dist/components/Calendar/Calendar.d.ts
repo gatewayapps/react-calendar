@@ -1,4 +1,3 @@
-import 'react-tabs/style/react-tabs.css';
 import React from 'react';
 import { DayOfWeek } from '../../lib/DayOfWeek';
 import { IEvent } from '../../lib/event';

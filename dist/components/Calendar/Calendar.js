@@ -22,7 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-require("react-tabs/style/react-tabs.css");
 const date_fns_1 = require("date-fns");
 const react_1 = __importStar(require("react"));
 const Calendar_styled_1 = require("./Calendar.styled");
