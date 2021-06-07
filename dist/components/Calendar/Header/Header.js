@@ -51,11 +51,11 @@ const Header = (props) => {
         props.views ? React.createElement(react_tabs_1.TabList, null,
             React.createElement(react_tabs_1.Tab, { key: 0, selected: props.activeTab === 0, onClick: () => {
                     props.setNumOfWeeks(constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    setTimeout(() => props.setActiveTab(0), 500);
+                    setTimeout(() => props.setActiveTab(0), 100);
                 } }, "Standard View"),
             props.views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i + 1, selected: props.activeTab === i + 1, onClick: () => {
                     props.setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    setTimeout(() => props.setActiveTab(i + 1), 500);
+                    setTimeout(() => props.setActiveTab(i + 1), 100);
                 } }, name)))) : React.createElement("div", null),
         React.createElement(Header_styled_1.Title, null, date_fns_1.format(props.currentSpan, 'MMMM yyyy')),
         React.createElement(Header_styled_1.NavContainer, null,

@@ -49,7 +49,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                   selected={props.activeTab === 0}
                   onClick={(): void => {
                     props.setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
-                    setTimeout(() => props.setActiveTab(0), 500)
+                    setTimeout(() => props.setActiveTab(0), 100)
                   }}>
                   Standard View
                 </Tab>
@@ -59,7 +59,7 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
                     selected={props.activeTab === i + 1}
                     onClick={(): void => {
                       props.setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
-                      setTimeout(() => props.setActiveTab(i + 1), 500)
+                      setTimeout(() => props.setActiveTab(i + 1), 100)
                     }}>
                     {name}
                   </Tab>
