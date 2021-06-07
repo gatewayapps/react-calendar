@@ -5,7 +5,6 @@ interface IHeaderProps {
     currentSpan: Date;
     numberOfWeeks: number;
     setCurrentSpan: (date: Date) => void;
-    setActiveTab: (tab: number) => void;
     setNumOfWeeks: (weeks: number) => void;
     shouldShowTodayButton?: boolean;
     shouldShowDatePicker?: boolean;

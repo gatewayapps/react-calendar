@@ -25,7 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const date_fns_1 = require("date-fns");
 const React = __importStar(require("react"));
 const Header_styled_1 = require("./Header.styled");
-const reactstrap_1 = require("reactstrap");
+const react_tabs_1 = require("react-tabs");
 const pro_solid_svg_icons_1 = require("@fortawesome/pro-solid-svg-icons");
 const constants_1 = require("../../../lib/constants");
 const DatePicker_1 = __importDefault(require("../DatePicker"));
@@ -48,17 +48,13 @@ const Header = (props) => {
         return date_fns_1.addWeeks(props.currentSpan, props.numberOfWeeks);
     }, [props.currentSpan, props.numberOfWeeks]);
     return (React.createElement(Header_styled_1.HeaderContainer, null,
-        props.views ? React.createElement(reactstrap_1.Nav, { tabs: true },
-            React.createElement(reactstrap_1.NavItem, null,
-                React.createElement(reactstrap_1.NavLink, { onClick: () => {
-                        props.setActiveTab(0);
-                        props.setNumOfWeeks(constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    } }, "Standard View")),
-            props.views.map(({ name, weeks }, i) => (React.createElement(reactstrap_1.NavItem, { key: i },
-                React.createElement(reactstrap_1.NavLink, { onClick: () => {
-                        props.setActiveTab(i + 1);
-                        props.setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    } }, name))))) : React.createElement("div", null),
+        props.views ? React.createElement(react_tabs_1.TabList, null,
+            React.createElement(react_tabs_1.Tab, { onClick: () => {
+                    props.setNumOfWeeks(constants_1.DEFAULT_NUMBER_OF_WEEKS);
+                } }, "Standard View"),
+            props.views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i, onClick: () => {
+                    props.setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
+                } }, name)))) : React.createElement("div", null),
         React.createElement(Header_styled_1.Title, null, date_fns_1.format(props.currentSpan, 'MMMM yyyy')),
         React.createElement(Header_styled_1.NavContainer, null,
             props.shouldShowTodayButton && (React.createElement("button", { disabled: date_fns_1.isSameMonth(props.currentSpan, new Date()), style: { marginRight: '10px' }, className: "nav-button", onClick: () => props.setCurrentSpan(new Date()) },
