@@ -48,11 +48,6 @@ const Body = (_a) => {
         const { start, end } = props.validRange;
         return allDays.every((day) => date_fns_1.isWithinInterval(day, { start, end }));
     }, []);
-    React.useEffect(() => {
-        if (props.getCalendarDates) {
-            props.getCalendarDates({ end, start });
-        }
-    }, [props.getCalendarDates, start, end]);
     if (!daysWithinValidRange) {
         return null;
     }

@@ -73,6 +73,12 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
     }
   }, [props.weeks])
 
+  React.useEffect(() => {
+    if (props.getCalendarDates) {
+      props.getCalendarDates({ end, start })
+    }
+  }, [props.getCalendarDates, start, end])
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CalendarContainer selectedIndex={activeTab} onSelect={() => {}}>
@@ -98,7 +104,6 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
                   start={start}
                   end={end}
                   events={props.events}
-                  getCalendarDates={props.getCalendarDates}
                   numberOfWeeks={numOfWeeks}
                   weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}
                   shouldScrollSync={props.shouldScrollSync}
@@ -119,7 +124,6 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
             start={start}
             end={end}
             events={props.events}
-            getCalendarDates={props.getCalendarDates}
             numberOfWeeks={numOfWeeks}
             weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}
             shouldScrollSync={props.shouldScrollSync}

@@ -12,7 +12,6 @@ interface IBodyProps {
   start: Date
   end: Date
   events?: IEventSource[]
-  getCalendarDates?: (values: { start: Date; end: Date }) => void
   shouldScrollSync?: boolean
   numberOfWeeks: number
   weekStartsOn: DayOfWeek
@@ -32,12 +31,6 @@ const Body: React.FunctionComponent<IBodyProps> = ({ start, end, ...props }) => 
     const { start, end } = props.validRange
     return allDays.every((day) => isWithinInterval(day, { start, end }))
   }, [])
-
-  React.useEffect(() => {
-    if (props.getCalendarDates) {
-      props.getCalendarDates({ end, start })
-    }
-  }, [props.getCalendarDates, start, end])
 
   if (!daysWithinValidRange) {
     return null

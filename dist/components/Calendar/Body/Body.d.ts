@@ -8,10 +8,6 @@ interface IBodyProps {
     start: Date;
     end: Date;
     events?: IEventSource[];
-    getCalendarDates?: (values: {
-        start: Date;
-        end: Date;
-    }) => void;
     shouldScrollSync?: boolean;
     numberOfWeeks: number;
     weekStartsOn: DayOfWeek;
