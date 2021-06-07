@@ -25,47 +25,48 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const date_fns_1 = require("date-fns");
 const React = __importStar(require("react"));
 const Header_styled_1 = require("./Header.styled");
-const react_tabs_1 = require("react-tabs");
 const pro_solid_svg_icons_1 = require("@fortawesome/pro-solid-svg-icons");
 const constants_1 = require("../../../lib/constants");
 const DatePicker_1 = __importDefault(require("../DatePicker"));
 const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
+const react_tabs_1 = require("react-tabs");
 const subMonths_1 = __importDefault(require("date-fns/subMonths"));
-const Header = (props) => {
-    const validRange = React.useMemo(() => { if (!props.validRange) {
+const Header = ({ activeTab, currentSpan, numberOfWeeks, setActiveTab, setCurrentSpan, setNumOfWeeks, shouldShowDatePicker, shouldShowTodayButton, validRange, views }) => {
+    const range = React.useMemo(() => { if (!validRange) {
         return undefined;
-    } ; return { start: new Date(props.validRange.start), end: new Date(props.validRange.end) }; }, [props.validRange]);
+    } ; return { start: new Date(validRange.start), end: new Date(validRange.end) }; }, [validRange]);
     const navigatePrevspan = React.useMemo(() => {
-        if (props.numberOfWeeks === 6) {
-            return subMonths_1.default(props.currentSpan, 1);
+        if (numberOfWeeks === 6) {
+            return subMonths_1.default(currentSpan, 1);
         }
-        return date_fns_1.subWeeks(props.currentSpan, props.numberOfWeeks);
-    }, [props.currentSpan, props.numberOfWeeks]);
+        return date_fns_1.subWeeks(currentSpan, numberOfWeeks);
+    }, [currentSpan, numberOfWeeks]);
     const navigateNextspan = React.useMemo(() => {
-        if (props.numberOfWeeks === 6) {
-            return date_fns_1.addMonths(props.currentSpan, 1);
+        if (numberOfWeeks === 6) {
+            return date_fns_1.addMonths(currentSpan, 1);
         }
-        return date_fns_1.addWeeks(props.currentSpan, props.numberOfWeeks);
-    }, [props.currentSpan, props.numberOfWeeks]);
+        return date_fns_1.addWeeks(currentSpan, numberOfWeeks);
+    }, [currentSpan, numberOfWeeks]);
     return (React.createElement(Header_styled_1.HeaderContainer, null,
-        props.views ? React.createElement(react_tabs_1.TabList, null,
-            React.createElement(react_tabs_1.Tab, { key: 0, selected: props.activeTab === 0, onClick: () => {
-                    props.setNumOfWeeks(constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    setTimeout(() => props.setActiveTab(0), 100);
-                } }, "Standard View"),
-            props.views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i + 1, selected: props.activeTab === i + 1, onClick: () => {
-                    props.setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    setTimeout(() => props.setActiveTab(i + 1), 100);
-                } }, name)))) : React.createElement("div", null),
-        React.createElement(Header_styled_1.Title, null, date_fns_1.format(props.currentSpan, 'MMMM yyyy')),
+        React.createElement("div", null, views &&
+            React.createElement(React.Fragment, null,
+                React.createElement(react_tabs_1.Tab, { key: 0, selected: activeTab === 0, onClick: () => {
+                        setNumOfWeeks(constants_1.DEFAULT_NUMBER_OF_WEEKS);
+                        setTimeout(() => setActiveTab(0), 100);
+                    } }, "Standard View"),
+                views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i + 1, selected: activeTab === i + 1, onClick: () => {
+                        setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
+                        setTimeout(() => setActiveTab(i + 1), 100);
+                    } }, name))))),
+        React.createElement(Header_styled_1.Title, null, date_fns_1.format(currentSpan, 'MMMM yyyy')),
         React.createElement(Header_styled_1.NavContainer, null,
-            props.shouldShowTodayButton && (React.createElement("button", { disabled: date_fns_1.isSameMonth(props.currentSpan, new Date()), style: { marginRight: '10px' }, className: "nav-button", onClick: () => props.setCurrentSpan(new Date()) },
+            shouldShowTodayButton && (React.createElement("button", { disabled: date_fns_1.isSameMonth(currentSpan, new Date()), style: { marginRight: '10px' }, className: "nav-button", onClick: () => setCurrentSpan(new Date()) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faStopwatch }),
                 React.createElement("span", null, "Today"))),
-            React.createElement("button", { disabled: validRange ? !date_fns_1.isWithinInterval(navigatePrevspan, validRange) : false, style: { marginRight: '5px' }, className: "nav-button", onClick: () => props.setCurrentSpan(navigatePrevspan) },
+            React.createElement("button", { disabled: validRange ? !date_fns_1.isWithinInterval(navigatePrevspan, validRange) : false, style: { marginRight: '5px' }, className: "nav-button", onClick: () => setCurrentSpan(navigatePrevspan) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faChevronLeft })),
-            props.shouldShowDatePicker && (React.createElement(DatePicker_1.default, { onChange: (evt) => props.setCurrentSpan(evt), minDate: validRange === null || validRange === void 0 ? void 0 : validRange.start, maxDate: validRange === null || validRange === void 0 ? void 0 : validRange.end, showMonthYearPicker: true, showYearDropdown: true })),
-            React.createElement("button", { disabled: validRange ? !date_fns_1.isWithinInterval(navigateNextspan, validRange) : false, style: { marginLeft: '5px' }, className: "nav-button", onClick: () => props.setCurrentSpan(navigateNextspan) },
+            shouldShowDatePicker && (React.createElement(DatePicker_1.default, { onChange: (evt) => setCurrentSpan(evt), minDate: range === null || range === void 0 ? void 0 : range.start, maxDate: range === null || range === void 0 ? void 0 : range.end, showMonthYearPicker: true, showYearDropdown: true })),
+            React.createElement("button", { disabled: validRange ? !date_fns_1.isWithinInterval(navigateNextspan, validRange) : false, style: { marginLeft: '5px' }, className: "nav-button", onClick: () => setCurrentSpan(navigateNextspan) },
                 React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: pro_solid_svg_icons_1.faChevronRight })))));
 };
 exports.default = Header;

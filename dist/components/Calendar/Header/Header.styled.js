@@ -4,8 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Title = exports.NavContainer = exports.HeaderContainer = void 0;
+const react_tabs_1 = require("react-tabs");
 const styled_components_1 = __importDefault(require("../../../styles/styled-components"));
-exports.HeaderContainer = styled_components_1.default.div `
+exports.HeaderContainer = styled_components_1.default(react_tabs_1.TabList) `
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
