@@ -71,8 +71,9 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <CalendarContainer selectedIndex={activeTab}>
+      <CalendarContainer selectedIndex={activeTab} onSelect={() => {}}>
         <Header
+          activeTab={activeTab}
           currentSpan={currentSpan}
           numberOfWeeks={numOfWeeks}
           setActiveTab={setActiveTab}

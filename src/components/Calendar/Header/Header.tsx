@@ -10,6 +10,7 @@ import { View } from '../../../lib/view'
 import subMonths from 'date-fns/subMonths'
 
 interface IHeaderProps {
+  activeTab: number
   currentSpan: Date
   numberOfWeeks: number
   setActiveTab: (index: number) => void
@@ -45,9 +46,8 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
       {props.views ? <TabList>
                 <Tab
                   key={0}
-                  tabIndex='0'
-                  onClick={(e): void => {
-                    e.preventDefault()
+                  selected={props.activeTab === 0}
+                  onClick={(): void => {
                     props.setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
                     setTimeout(() => props.setActiveTab(0), 500)
                   }}>
@@ -56,9 +56,8 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
               {props.views.map(({ name, weeks }, i) => (
                   <Tab
                     key={i + 1}
-                    tabIndex={`${i + 1}`}
-                    onClick={(e): void => {
-                      e.preventDefault()
+                    selected={props.activeTab === i + 1}
+                    onClick={(): void => {
                       props.setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
                       setTimeout(() => props.setActiveTab(i + 1), 500)
                     }}>

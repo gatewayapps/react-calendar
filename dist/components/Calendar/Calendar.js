@@ -60,8 +60,8 @@ const Calendar = (props) => {
         }
     }, [props.weeks]);
     return (react_1.default.createElement(styled_components_1.ThemeProvider, { theme: theme_1.defaultTheme },
-        react_1.default.createElement(Calendar_styled_1.CalendarContainer, { selectedIndex: activeTab },
-            react_1.default.createElement(Header_1.default, { currentSpan: currentSpan, numberOfWeeks: numOfWeeks, setActiveTab: setActiveTab, setCurrentSpan: setCurrentSpan, setNumOfWeeks: setNumOfWeeks, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker, validRange: range, views: props.views }),
+        react_1.default.createElement(Calendar_styled_1.CalendarContainer, { selectedIndex: activeTab, onSelect: () => { } },
+            react_1.default.createElement(Header_1.default, { activeTab: activeTab, currentSpan: currentSpan, numberOfWeeks: numOfWeeks, setActiveTab: setActiveTab, setCurrentSpan: setCurrentSpan, setNumOfWeeks: setNumOfWeeks, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker, validRange: range, views: props.views }),
             react_1.default.createElement(Calendar_styled_1.CalendarBodyContainer, null,
                 props.loadingComponent,
                 props.views ? (react_1.default.createElement(react_1.default.Fragment, null,

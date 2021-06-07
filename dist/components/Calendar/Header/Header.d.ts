@@ -2,6 +2,7 @@ import { Interval } from 'date-fns';
 import * as React from 'react';
 import { View } from '../../../lib/view';
 interface IHeaderProps {
+    activeTab: number;
     currentSpan: Date;
     numberOfWeeks: number;
     setActiveTab: (index: number) => void;
