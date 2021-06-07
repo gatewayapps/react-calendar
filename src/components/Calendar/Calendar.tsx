@@ -63,6 +63,10 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
     }
   }, [props.validRange])
 
+  const renderView = React.useCallback((viewComponent: View['component']) => {
+        return viewComponent({ endDate: end, events: props.events, startDate: start, validRange: range })
+      }, [end, start, props.events, range])
+
   React.useEffect(() => {
     if(props.weeks && props.weeks > 0 && activeTab === 0) {
       setNumOfWeeks(props.weeks)
@@ -105,7 +109,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
               </TabPanel>
               {props.views.map(({ component }, i) => (
                 <TabPanel key={i + 1} tabIndex={i + 1}>
-                  {component({ startDate: start, endDate: end, events: props.events, validRange: range })}
+                  {renderView(component)}
                 </TabPanel>
               ))}
           </>
