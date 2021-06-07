@@ -1,7 +1,7 @@
 import { Interval, addWeeks, addMonths, format, isSameMonth, isWithinInterval, subWeeks } from 'date-fns'
 import * as React from 'react'
 import { HeaderContainer, NavContainer, Title } from './Header.styled'
-import { Nav, NavItem, NavLink } from 'reactstrap'
+import { TabList, Tab } from 'react-tabs'
 import { faChevronLeft, faChevronRight, faStopwatch } from '@fortawesome/pro-solid-svg-icons'
 import { DEFAULT_NUMBER_OF_WEEKS } from '../../../lib/constants'
 import DatePicker from '../DatePicker'
@@ -13,7 +13,6 @@ interface IHeaderProps {
   currentSpan: Date
   numberOfWeeks: number
   setCurrentSpan: (date: Date) => void
-  setActiveTab: (tab: number) => void
   setNumOfWeeks: (weeks: number) => void
   shouldShowTodayButton?: boolean
   shouldShowDatePicker?: boolean
@@ -42,28 +41,23 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
 
   return (
     <HeaderContainer>
-      {props.views ? <Nav tabs>
-              <NavItem>
-                <NavLink
+      {props.views ? <TabList>
+                <Tab
                   onClick={(): void => {
-                    props.setActiveTab(0)
                     props.setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
                   }}>
                   Standard View
-                </NavLink>
-              </NavItem>
+                </Tab>
               {props.views.map(({ name, weeks }, i) => (
-                <NavItem key={i}>
-                  <NavLink
+                  <Tab
+                    key={i}
                     onClick={(): void => {
-                      props.setActiveTab(i + 1)
                       props.setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
                     }}>
                     {name}
-                  </NavLink>
-                </NavItem>
+                  </Tab>
               ))}
-            </Nav> : <div />}
+            </TabList> : <div />}
       <Title>{format(props.currentSpan, 'MMMM yyyy')}</Title>
       <NavContainer>
         {props.shouldShowTodayButton && (

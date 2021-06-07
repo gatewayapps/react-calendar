@@ -1,6 +1,6 @@
+import 'react-tabs/style/react-tabs.css';
 import { startOfMonth } from 'date-fns'
 import React, { useState } from 'react'
-import { TabContent, TabPane } from 'reactstrap'
 import { CalendarContainer, CalendarBodyContainer } from './Calendar.styled'
 import { DEFAULT_NUMBER_OF_WEEKS, DEFAULT_WEEK_STARTS_ON } from '../../lib/constants'
 import { Interval, parseISO } from 'date-fns'
@@ -13,6 +13,7 @@ import { DayOfWeek } from '../../lib/DayOfWeek'
 import Header from './Header'
 import { IEvent } from '../../lib/event'
 import { IEventSource } from '../../lib/eventSource'
+import { TabPanel } from 'react-tabs'
 import { ThemeProvider } from '../../styles/styled-components'
 import { View } from '../../lib/view'
 import { defaultTheme } from '../../styles/theme'
@@ -40,9 +41,9 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
     startOfMonth(props.defaultDate ?? new Date())
   )
 
-  const start = React.useMemo(() => getCalendarStartDate(currentSpan, props.weekStartsOn, numOfWeeks), [
-    currentSpan,
+  const start = React.useMemo(() => getCalendarStartDate(currentSpan, numOfWeeks, props.weekStartsOn,), [
     props.weekStartsOn,
+    currentSpan,
     numOfWeeks
   ])
 
@@ -71,12 +72,11 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <CalendarContainer>
+      <CalendarContainer selectedIndex={activeTab} onSelect={(index) => setActiveTab(index)}>
         <Header
           currentSpan={currentSpan}
           numberOfWeeks={numOfWeeks}
           setCurrentSpan={setCurrentSpan}
-          setActiveTab={setActiveTab}
           setNumOfWeeks={setNumOfWeeks}
           shouldShowTodayButton={props.shouldShowTodayButton}
           shouldShowDatePicker={props.shouldShowDatePicker}
@@ -87,8 +87,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
         {props.loadingComponent}
         {props.views ? (
           <>
-            <TabContent activeTab={activeTab}>
-              <TabPane tabId={0}>
+            <TabPanel>
                 <Body
                   currentSpan={currentSpan}
                   start={start}
@@ -102,13 +101,12 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
                   eventComponent={props.eventComponent}
                   validRange={range}
                 />
-              </TabPane>
+              </TabPanel>
               {props.views.map(({ component }, i) => (
-                <TabPane key={i} tabId={i + 1}>
+                <TabPanel key={i}>
                   {component({ startDate: start, endDate: end, events: props.events, validRange: range })}
-                </TabPane>
+                </TabPanel>
               ))}
-            </TabContent>
           </>
         ) : (
           <Body

@@ -1,23 +1,15 @@
+import { Tabs } from 'react-tabs'
 import styled from '../../styles/styled-components'
 
-export const CalendarContainer = styled.div`
+export const CalendarContainer = styled(Tabs)`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
 
-  .tab-content {
+  .react-tabs__tab-panel--selected {
     display: flex;
     flex: 1;
-  }
-
-  .tab-pane {
-    display: none;
-    flex: 1;
-
-    &.active {
-      display: flex;
-    }
   }
 `
 

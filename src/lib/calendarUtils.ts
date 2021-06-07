@@ -6,18 +6,18 @@ import { throttle } from './throttle'
 
 export function getCalendarStartDate(
   date: Date,
-  weekStartsOn: DayOfWeek = DayOfWeek.Sunday,
-  numberOfWeeks: number
+  numberOfWeeks: number = 6,
+  weekStartsOn: DayOfWeek = DayOfWeek.Sunday
 ): Date {
   return startOfWeek(numberOfWeeks === 6 ? startOfMonth(date) : date, { weekStartsOn })
 }
 
 export function getCalendarEndDate(
   date: Date,
-  numberOfWeeks: number,
+  numberOfWeeks: number = 6,
   weekStartsOn: DayOfWeek = DayOfWeek.Sunday
 ): Date {
-  const startDate = getCalendarStartDate(date, weekStartsOn, numberOfWeeks)
+  const startDate = getCalendarStartDate(date, numberOfWeeks, weekStartsOn)
   return startOfDay(endOfWeek(addWeeks(startDate, numberOfWeeks - 1), { weekStartsOn }))
 }
 
