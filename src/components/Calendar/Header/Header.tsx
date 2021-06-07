@@ -45,18 +45,22 @@ const Header: React.FunctionComponent<IHeaderProps> = (props) => {
       {props.views ? <TabList>
                 <Tab
                   key={0}
-                  onClick={(): void => {
+                  tabIndex='0'
+                  onClick={(e): void => {
+                    e.preventDefault()
                     props.setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
-                    props.setActiveTab(0)
+                    setTimeout(() => props.setActiveTab(0), 500)
                   }}>
                   Standard View
                 </Tab>
               {props.views.map(({ name, weeks }, i) => (
                   <Tab
                     key={i + 1}
-                    onClick={(): void => {
+                    tabIndex={`${i + 1}`}
+                    onClick={(e): void => {
+                      e.preventDefault()
                       props.setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
-                      props.setActiveTab(i + 1)
+                      setTimeout(() => props.setActiveTab(i + 1), 500)
                     }}>
                     {name}
                   </Tab>

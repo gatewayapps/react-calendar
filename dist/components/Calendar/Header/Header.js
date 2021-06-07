@@ -49,13 +49,15 @@ const Header = (props) => {
     }, [props.currentSpan, props.numberOfWeeks]);
     return (React.createElement(Header_styled_1.HeaderContainer, null,
         props.views ? React.createElement(react_tabs_1.TabList, null,
-            React.createElement(react_tabs_1.Tab, { key: 0, onClick: () => {
+            React.createElement(react_tabs_1.Tab, { key: 0, tabIndex: '0', onClick: (e) => {
+                    e.preventDefault();
                     props.setNumOfWeeks(constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    props.setActiveTab(0);
+                    setTimeout(() => props.setActiveTab(0), 500);
                 } }, "Standard View"),
-            props.views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i + 1, onClick: () => {
+            props.views.map(({ name, weeks }, i) => (React.createElement(react_tabs_1.Tab, { key: i + 1, tabIndex: `${i + 1}`, onClick: (e) => {
+                    e.preventDefault();
                     props.setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
-                    props.setActiveTab(i + 1);
+                    setTimeout(() => props.setActiveTab(i + 1), 500);
                 } }, name)))) : React.createElement("div", null),
         React.createElement(Header_styled_1.Title, null, date_fns_1.format(props.currentSpan, 'MMMM yyyy')),
         React.createElement(Header_styled_1.NavContainer, null,
