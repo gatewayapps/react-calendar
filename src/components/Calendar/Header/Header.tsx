@@ -1,11 +1,11 @@
 import { Interval, addWeeks, addMonths, format, isSameMonth, isWithinInterval, subWeeks } from 'date-fns'
 import * as React from 'react'
 import { HeaderContainer, NavContainer, Title } from './Header.styled'
+import { Tab, TabList } from 'react-tabs'
 import { faChevronLeft, faChevronRight, faStopwatch } from '@fortawesome/pro-solid-svg-icons'
 import { DEFAULT_NUMBER_OF_WEEKS } from '../../../lib/constants'
 import DatePicker from '../DatePicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Tab } from 'react-tabs'
 import { View } from '../../../lib/view'
 import subMonths from 'date-fns/subMonths'
 
@@ -43,32 +43,30 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan,
 
   return (
     <HeaderContainer>
-          <div>
-                {views &&
-                  <>
-                      <Tab
-                        key={0}
-                        selected={activeTab === 0}
-                        onClick={(): void => {
-                          setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
-                          setTimeout(() => setActiveTab(0), 100)
-                        }}>
-                        Standard View
-                      </Tab>
-                    {views.map(({ name, weeks }, i) => (
-                      <Tab
-                        key={i + 1}
-                        selected={activeTab === i + 1}
-                        onClick={(): void => {
-                          setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
-                          setTimeout(() => setActiveTab(i + 1), 100)
-                        }}>
-                        {name}
-                      </Tab>
-                    ))}
-                  </>
-                }
-          </div>
+            {views ?
+              <TabList>
+                  <Tab
+                    key={0}
+                    selected={activeTab === 0}
+                    onClick={(): void => {
+                      setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
+                      setTimeout(() => setActiveTab(0), 100)
+                    }}>
+                    Standard View
+                  </Tab>
+                {views.map(({ name, weeks }, i) => (
+                  <Tab
+                    key={i + 1}
+                    selected={activeTab === i + 1}
+                    onClick={(): void => {
+                      setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
+                      setTimeout(() => setActiveTab(i + 1), 100)
+                    }}>
+                    {name}
+                  </Tab>
+                ))}
+              </TabList> : <div />
+            }
       <Title>{format(currentSpan, 'MMMM yyyy')}</Title>
       <NavContainer>
         {shouldShowTodayButton && (

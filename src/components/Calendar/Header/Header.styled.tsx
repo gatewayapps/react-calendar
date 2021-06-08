@@ -1,7 +1,6 @@
-import { TabList, TabListProps } from 'react-tabs'
 import styled from '../../../styles/styled-components'
 
-export const HeaderContainer = styled(TabList)`
+export const HeaderContainer = styled.div`
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
