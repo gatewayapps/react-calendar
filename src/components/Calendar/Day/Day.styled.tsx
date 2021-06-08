@@ -39,9 +39,16 @@ export const DayContainer = styled.div<IDayContainerProps>`
   ${DayHeader} {
     border-top: ${(props) => {
       if (props.isToday) {
-        return `4px solid ${props.theme.calendarDay.todayBorderColor}`
+        return `5px solid ${props.theme.calendarDay.todayBorderColor}`
       } else {
         return 'unset'
+      }
+    }};
+    padding-bottom: ${(props) => {
+      if (props.isToday) {
+        return '0px'
+      } else {
+        return '5px'
       }
     }};
   }

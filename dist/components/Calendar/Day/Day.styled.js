@@ -38,10 +38,18 @@ exports.DayContainer = styled_components_1.default.div `
   ${exports.DayHeader} {
     border-top: ${(props) => {
     if (props.isToday) {
-        return `4px solid ${props.theme.calendarDay.todayBorderColor}`;
+        return `5px solid ${props.theme.calendarDay.todayBorderColor}`;
     }
     else {
         return 'unset';
+    }
+}};
+    padding-bottom: ${(props) => {
+    if (props.isToday) {
+        return '0px';
+    }
+    else {
+        return '5px';
     }
 }};
   }
