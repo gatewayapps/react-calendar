@@ -16,7 +16,9 @@ interface IBodyProps {
     }) => JSX.Element;
     eventComponent?: (props: {
         event: IEvent;
+        showEventTime?: boolean;
     }) => JSX.Element;
+    showEventTime?: boolean;
     validRange?: Interval;
 }
 declare const Body: React.FunctionComponent<IBodyProps>;

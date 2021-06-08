@@ -59,7 +59,7 @@ const Body = (_a) => {
         allDays.map((date, index) => {
             const row = Math.floor(index / 7) + 2;
             const column = (index % 7) + 1;
-            return (React.createElement(Day_1.default, { key: `${date.toISOString()}-${index}`, currentMonth: props.currentSpan, date: date, events: calendarUtils_1.getEventsForDay(date, props.events), row: row, shouldScrollSync: props.shouldScrollSync, column: column, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent }));
+            return (React.createElement(Day_1.default, { key: `${date.toISOString()}-${index}`, column: column, dayHeaderComponent: props.dayHeaderComponent, currentMonth: props.currentSpan, date: date, events: calendarUtils_1.getEventsForDay(date, props.events), eventComponent: props.eventComponent, row: row, showEventTime: props.showEventTime, shouldScrollSync: props.shouldScrollSync }));
         })));
 };
 exports.default = Body;

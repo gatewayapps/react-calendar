@@ -21,14 +21,14 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const React = __importStar(require("react"));
 const Event_styled_1 = require("./Event.styled");
-const Event = (props) => {
+const Event = ({ body, code, color, showEventTime = true, title }) => {
     return (React.createElement(Event_styled_1.StyledEvent, null,
         React.createElement(Event_styled_1.StyledEventLink, null,
             React.createElement(Event_styled_1.StyledEventContent, null,
-                React.createElement(Event_styled_1.StyledColorTag, { style: props.color ? { backgroundColor: props.color } : undefined }),
+                React.createElement(Event_styled_1.StyledColorTag, { style: color ? { backgroundColor: color } : undefined }),
                 React.createElement(Event_styled_1.StyledEventBody, null,
-                    React.createElement("span", null, props.title),
-                    React.createElement("span", null, props.body))))));
+                    React.createElement("span", null, title),
+                    React.createElement("span", null, showEventTime ? body : `(${code})`))))));
 };
 exports.default = Event;
 //# sourceMappingURL=Event.js.map

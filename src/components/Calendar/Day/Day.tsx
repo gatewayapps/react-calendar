@@ -14,7 +14,8 @@ interface IDayProps {
   column: number
   shouldScrollSync?: boolean
   dayHeaderComponent?: (props: { date: Date }) => JSX.Element
-  eventComponent?: (props: { event: IEvent }) => JSX.Element
+  eventComponent?: (props: { event: IEvent, showEventTime?: boolean }) => JSX.Element
+  showEventTime?: boolean
 }
 
 const CalendarDay: React.FunctionComponent<IDayProps> = ({
@@ -53,7 +54,7 @@ const CalendarDay: React.FunctionComponent<IDayProps> = ({
       </DayHeader>
       <EventsContainer ref={setEventContainerRef}>
         {props.events.map((event, i) => {
-          return eventComponent ? eventComponent({ event }) : <Event {...event} key={event.id ?? `${event.date.toISOString()}-${i}`} />
+          return eventComponent ? eventComponent({ event, showEventTime: props.showEventTime }) : <Event {...event} showEventTime={props.showEventTime} key={event.id ?? `${event.date.toISOString()}-${i}`} />
         })}
       </EventsContainer>
     </DayContainer>

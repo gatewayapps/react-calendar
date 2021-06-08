@@ -58,7 +58,7 @@ const CalendarDay = (_a) => {
         React.createElement(Day_styled_1.DayHeader, null, dayHeaderComponent ? dayHeaderComponent({ date: props.date }) : props.date.getDate()),
         React.createElement(Day_styled_1.EventsContainer, { ref: setEventContainerRef }, props.events.map((event, i) => {
             var _a;
-            return eventComponent ? eventComponent({ event }) : React.createElement(Event_1.default, Object.assign({}, event, { key: (_a = event.id) !== null && _a !== void 0 ? _a : `${event.date.toISOString()}-${i}` }));
+            return eventComponent ? eventComponent({ event, showEventTime: props.showEventTime }) : React.createElement(Event_1.default, Object.assign({}, event, { showEventTime: props.showEventTime, key: (_a = event.id) !== null && _a !== void 0 ? _a : `${event.date.toISOString()}-${i}` }));
         }))));
 };
 exports.default = CalendarDay;

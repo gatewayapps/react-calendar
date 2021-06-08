@@ -18,6 +18,17 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -33,11 +44,12 @@ const Header_1 = __importDefault(require("./Header"));
 const react_tabs_1 = require("react-tabs");
 const styled_components_1 = require("../../styles/styled-components");
 const theme_1 = require("../../styles/theme");
-const Calendar = (props) => {
-    var _a;
+const Calendar = (_a) => {
+    var _b;
+    var { headerToolbar = true } = _a, props = __rest(_a, ["headerToolbar"]);
     const [activeTab, setActiveTab] = react_1.default.useState(0);
     const [numOfWeeks, setNumOfWeeks] = react_1.default.useState(constants_1.DEFAULT_NUMBER_OF_WEEKS);
-    const [currentSpan, setCurrentSpan] = react_1.useState(date_fns_1.startOfMonth((_a = props.defaultDate) !== null && _a !== void 0 ? _a : new Date()));
+    const [currentSpan, setCurrentSpan] = react_1.useState(date_fns_1.startOfMonth((_b = props.defaultDate) !== null && _b !== void 0 ? _b : new Date()));
     const start = react_1.default.useMemo(() => calendarUtils_1.getCalendarStartDate(currentSpan, numOfWeeks, props.weekStartsOn), [
         props.weekStartsOn,
         currentSpan,
@@ -69,13 +81,13 @@ const Calendar = (props) => {
     }, [props.getCalendarDates, start, end]);
     return (react_1.default.createElement(styled_components_1.ThemeProvider, { theme: theme_1.defaultTheme },
         react_1.default.createElement(Calendar_styled_1.CalendarContainer, { selectedIndex: activeTab, onSelect: () => { } },
-            react_1.default.createElement(Header_1.default, { activeTab: activeTab, currentSpan: currentSpan, numberOfWeeks: numOfWeeks, setActiveTab: setActiveTab, setCurrentSpan: setCurrentSpan, setNumOfWeeks: setNumOfWeeks, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker, validRange: range, views: props.views }),
+            headerToolbar && react_1.default.createElement(Header_1.default, { activeTab: activeTab, currentSpan: currentSpan, numberOfWeeks: numOfWeeks, setActiveTab: setActiveTab, setCurrentSpan: setCurrentSpan, setNumOfWeeks: setNumOfWeeks, shouldShowTodayButton: props.shouldShowTodayButton, shouldShowDatePicker: props.shouldShowDatePicker, validRange: range, views: props.views }),
             react_1.default.createElement(Calendar_styled_1.CalendarBodyContainer, null,
                 props.loadingComponent,
                 props.views ? (react_1.default.createElement(react_1.default.Fragment, null,
                     react_1.default.createElement(react_tabs_1.TabPanel, { key: 0, tabIndex: 0 },
-                        react_1.default.createElement(Body_1.default, { currentSpan: currentSpan, start: start, end: end, events: props.events, numberOfWeeks: numOfWeeks, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range })),
-                    props.views.map(({ component }, i) => (react_1.default.createElement(react_tabs_1.TabPanel, { key: i + 1, tabIndex: i + 1 }, renderView(component)))))) : (react_1.default.createElement(Body_1.default, { currentSpan: currentSpan, start: start, end: end, events: props.events, numberOfWeeks: numOfWeeks, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, validRange: range }))))));
+                        react_1.default.createElement(Body_1.default, { currentSpan: currentSpan, start: start, end: end, events: props.events, numberOfWeeks: numOfWeeks, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, showEventTime: props.showEventTime, validRange: range })),
+                    props.views.map(({ component }, i) => (react_1.default.createElement(react_tabs_1.TabPanel, { key: i + 1, tabIndex: i + 1 }, renderView(component)))))) : (react_1.default.createElement(Body_1.default, { currentSpan: currentSpan, start: start, end: end, events: props.events, numberOfWeeks: numOfWeeks, weekStartsOn: props.weekStartsOn || constants_1.DEFAULT_WEEK_STARTS_ON, shouldScrollSync: props.shouldScrollSync, dayHeaderComponent: props.dayHeaderComponent, eventComponent: props.eventComponent, showEventTime: props.showEventTime, validRange: range }))))));
 };
 exports.default = Calendar;
 //# sourceMappingURL=Calendar.js.map

@@ -8,15 +8,25 @@ import {
   StyledEventLink
 } from './Event.styled'
 
-const Event: React.FunctionComponent<IEvent> = (props) => {
+interface IEventProps extends IEvent {
+  showEventTime?: boolean
+}
+
+const Event: React.FunctionComponent<IEventProps> = ({
+  body,
+  code,
+  color,
+  showEventTime = true,
+  title
+}) => {
   return (
     <StyledEvent>
       <StyledEventLink>
         <StyledEventContent>
-          <StyledColorTag style={props.color ? { backgroundColor: props.color } : undefined} />
+          <StyledColorTag style={color ? { backgroundColor: color } : undefined} />
           <StyledEventBody>
-            <span>{props.title}</span>
-            <span>{props.body}</span>
+            <span>{title}</span>
+            <span>{showEventTime ? body : `(${code})`}</span>
           </StyledEventBody>
         </StyledEventContent>
       </StyledEventLink>

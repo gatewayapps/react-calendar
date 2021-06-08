@@ -12,7 +12,9 @@ interface IDayProps {
     }) => JSX.Element;
     eventComponent?: (props: {
         event: IEvent;
+        showEventTime?: boolean;
     }) => JSX.Element;
+    showEventTime?: boolean;
 }
 declare const CalendarDay: React.FunctionComponent<IDayProps>;
 export default CalendarDay;

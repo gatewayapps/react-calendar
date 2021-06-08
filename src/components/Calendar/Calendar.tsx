@@ -19,21 +19,23 @@ import { defaultTheme } from '../../styles/theme'
 
 export interface ICalendarProps {
   defaultDate?: Date
+  dayHeaderComponent?: (props: { date: Date }) => JSX.Element
   events?: IEventSource[]
+  eventComponent?: (props: { event: IEvent, showEventTime?: boolean }) => JSX.Element
   getCalendarDates?: (values: { start: Date; end: Date }) => void
-  weekStartsOn?: DayOfWeek
+  headerToolbar?: boolean
+  loadingComponent?: JSX.Element
   shouldScrollSync?: boolean
   shouldShowDatePicker?: boolean
   shouldShowTodayButton?: boolean
-  dayHeaderComponent?: (props: { date: Date }) => JSX.Element
-  eventComponent?: (props: { event: IEvent }) => JSX.Element
+  showEventTime?: boolean
   views?: View[]
   validRange?: { start: Date | string; end: Date | string }
-  loadingComponent?: JSX.Element
   weeks?: number
+  weekStartsOn?: DayOfWeek
 }
 
-const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
+const Calendar: React.FunctionComponent<ICalendarProps> = ({ headerToolbar = true, ...props }) => {
   const [activeTab, setActiveTab] = React.useState<number>(0)
   const [numOfWeeks, setNumOfWeeks] = React.useState<number>(DEFAULT_NUMBER_OF_WEEKS)
   const [currentSpan, setCurrentSpan] = useState<Date>(
@@ -82,7 +84,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CalendarContainer selectedIndex={activeTab} onSelect={() => {}}>
-        <Header
+        {headerToolbar && <Header
           activeTab={activeTab}
           currentSpan={currentSpan}
           numberOfWeeks={numOfWeeks}
@@ -93,7 +95,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
           shouldShowDatePicker={props.shouldShowDatePicker}
           validRange={range}
           views={props.views}
-        />
+        />}
         <CalendarBodyContainer>
         {props.loadingComponent}
         {props.views ? (
@@ -109,6 +111,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
                   shouldScrollSync={props.shouldScrollSync}
                   dayHeaderComponent={props.dayHeaderComponent}
                   eventComponent={props.eventComponent}
+                  showEventTime={props.showEventTime}
                   validRange={range}
                 />
               </TabPanel>
@@ -129,6 +132,7 @@ const Calendar: React.FunctionComponent<ICalendarProps> = (props) => {
             shouldScrollSync={props.shouldScrollSync}
             dayHeaderComponent={props.dayHeaderComponent}
             eventComponent={props.eventComponent}
+            showEventTime={props.showEventTime}
             validRange={range}
           />
         )}

@@ -16,7 +16,8 @@ interface IBodyProps {
   numberOfWeeks: number
   weekStartsOn: DayOfWeek
   dayHeaderComponent?: (props: { date: Date }) => JSX.Element
-  eventComponent?: (props: { event: IEvent }) => JSX.Element
+  eventComponent?: (props: { event: IEvent; showEventTime?: boolean }) => JSX.Element
+  showEventTime?: boolean
   validRange?: Interval
 }
 
@@ -52,14 +53,15 @@ const Body: React.FunctionComponent<IBodyProps> = ({ start, end, ...props }) => 
         return (
           <Day
             key={`${date.toISOString()}-${index}`}
+            column={column}
+            dayHeaderComponent={props.dayHeaderComponent}
             currentMonth={props.currentSpan}
             date={date}
             events={getEventsForDay(date, props.events)}
-            row={row}
-            shouldScrollSync={props.shouldScrollSync}
-            column={column}
-            dayHeaderComponent={props.dayHeaderComponent}
             eventComponent={props.eventComponent}
+            row={row}
+            showEventTime={props.showEventTime}
+            shouldScrollSync={props.shouldScrollSync}
           />
         )
       })}
