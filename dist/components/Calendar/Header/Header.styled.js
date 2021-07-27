@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Title = exports.NavContainer = exports.HeaderContainer = void 0;
+exports.TabIcon = exports.Title = exports.NavContainer = exports.HeaderContainer = void 0;
 const styled_components_1 = __importDefault(require("../../../styles/styled-components"));
+const react_fontawesome_1 = require("@fortawesome/react-fontawesome");
 exports.HeaderContainer = styled_components_1.default.div `
   align-items: center;
   display: grid;
@@ -45,5 +46,8 @@ exports.Title = styled_components_1.default.h2 `
   color: ${(props) => props.theme.header.title.color};
   justify-self: center;
   margin: 0px;
+`;
+exports.TabIcon = styled_components_1.default(react_fontawesome_1.FontAwesomeIcon) `
+  margin-right: 5px;
 `;
 //# sourceMappingURL=Header.styled.js.map
