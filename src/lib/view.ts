@@ -1,4 +1,5 @@
 import { IEventSource } from '../../dist/lib/eventSource'
+import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { Interval } from 'date-fns'
 
 export interface View {
@@ -9,5 +10,6 @@ export interface View {
     events?: IEventSource[]
     validRange?: Interval
   }) => JSX.Element
+  icon?: IconDefinition
   weeks?: number
 }

@@ -1,12 +1,13 @@
 import { Interval, addWeeks, addMonths, format, isSameMonth, isWithinInterval, subWeeks } from 'date-fns'
 import * as React from 'react'
-import { HeaderContainer, NavContainer, Title } from './Header.styled'
+import { HeaderContainer, NavContainer, TabIcon, Title } from './Header.styled'
 import { Tab, TabList } from 'react-tabs'
-import { faChevronLeft, faChevronRight, faStopwatch } from '@fortawesome/pro-solid-svg-icons'
+import { faCalendarAlt, faChevronLeft, faChevronRight, faStopwatch } from '@fortawesome/pro-solid-svg-icons'
 import { DEFAULT_NUMBER_OF_WEEKS } from '../../../lib/constants'
 import DatePicker from '../DatePicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { View } from '../../../lib/view'
+import { throttle } from 'lodash'
 import subMonths from 'date-fns/subMonths'
 
 interface IHeaderProps {
@@ -24,6 +25,8 @@ interface IHeaderProps {
 
 const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan, numberOfWeeks, setActiveTab, setCurrentSpan, setNumOfWeeks, shouldShowDatePicker, shouldShowTodayButton, validRange, views }) => {
   const range = React.useMemo(() => { if(!validRange) { return undefined }; return { start: new Date(validRange.start), end: new Date(validRange.end) } }, [validRange])
+
+  const throttledSetCurrentSpan = throttle(setCurrentSpan, 500)
 
   const navigatePrevspan = React.useMemo(() => {
     if(numberOfWeeks === 6) {
@@ -52,9 +55,10 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan,
                       setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
                       setTimeout(() => setActiveTab(0), 100)
                     }}>
+                    <TabIcon icon={faCalendarAlt} />
                     Standard View
                   </Tab>
-                {views.map(({ name, weeks }, i) => (
+                {views.map(({ icon, name, weeks }, i) => (
                   <Tab
                     key={i + 1}
                     selected={activeTab === i + 1}
@@ -62,6 +66,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan,
                       setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
                       setTimeout(() => setActiveTab(i + 1), 100)
                     }}>
+                    {icon && <FontAwesomeIcon icon={icon} />}
                     {name}
                   </Tab>
                 ))}
@@ -83,7 +88,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan,
           disabled={validRange ? !isWithinInterval(navigatePrevspan, validRange) : false}
           style={{ marginRight: '5px' }}
           className="nav-button"
-          onClick={() => setCurrentSpan(navigatePrevspan)}>
+          onClick={() => throttledSetCurrentSpan(navigatePrevspan)}>
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
         {shouldShowDatePicker && (
@@ -99,7 +104,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan,
           disabled={validRange ? !isWithinInterval(navigateNextspan, validRange) : false}
           style={{ marginLeft: '5px' }}
           className="nav-button"
-          onClick={() => setCurrentSpan(navigateNextspan)}>
+          onClick={() => throttledSetCurrentSpan(navigateNextspan)}>
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </NavContainer>

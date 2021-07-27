@@ -1,4 +1,5 @@
 import styled from '../../../styles/styled-components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const HeaderContainer = styled.div`
   align-items: center;
@@ -42,4 +43,8 @@ export const Title = styled.h2`
   color: ${(props) => props.theme.header.title.color};
   justify-self: center;
   margin: 0px;
+`
+
+export const TabIcon = styled(FontAwesomeIcon)`
+  margin-right: 5px;
 `
