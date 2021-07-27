@@ -66,7 +66,7 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan,
                       setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
                       setTimeout(() => setActiveTab(i + 1), 100)
                     }}>
-                    {icon && <FontAwesomeIcon icon={icon} />}
+                    {icon && <TabIcon icon={icon} />}
                     {name}
                   </Tab>
                 ))}

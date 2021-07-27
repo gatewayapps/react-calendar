@@ -62,7 +62,7 @@ const Header = ({ activeTab, currentSpan, numberOfWeeks, setActiveTab, setCurren
                         setNumOfWeeks(weeks !== null && weeks !== void 0 ? weeks : constants_1.DEFAULT_NUMBER_OF_WEEKS);
                         setTimeout(() => setActiveTab(i + 1), 100);
                     } },
-                    icon && React.createElement(react_fontawesome_1.FontAwesomeIcon, { icon: icon }),
+                    icon && React.createElement(Header_styled_1.TabIcon, { icon: icon }),
                     name)))) : React.createElement("div", null),
         React.createElement(Header_styled_1.Title, null, date_fns_1.format(currentSpan, 'MMMM yyyy')),
         React.createElement(Header_styled_1.NavContainer, null,
