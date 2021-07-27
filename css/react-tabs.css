@@ -5,6 +5,8 @@
 }
 
 .react-tabs__tab {
+  border: 1px solid #ddd;
+  border-radius: 5px 5px 0 0;
   top: 1.2em;
   left: -0.5em;
 }
