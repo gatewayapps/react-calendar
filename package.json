@@ -14,6 +14,7 @@
   "private": false,
   "scripts": {
     "storybook": "start-storybook -p 3700",
+    "lint": "eslint --quiet \"./src/**/*.{ts,tsx}\"",
     "build": "yarn tsc --project tsconfig-build.json"
   },
   "devDependencies": {
@@ -30,9 +31,16 @@
     "@types/react-tabs": "^2.3.2",
     "@types/storybook__react": "^4.0.1",
     "@types/styled-components": "^5.1.9",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
     "babel-loader": "^8.0.5",
     "enzyme": "^3.11.0",
+    "eslint": "^7.31.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "prettier": "^1.17.0",

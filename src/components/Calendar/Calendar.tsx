@@ -3,10 +3,7 @@ import React, { useState } from 'react'
 import { CalendarContainer, CalendarBodyContainer } from './Calendar.styled'
 import { DEFAULT_NUMBER_OF_WEEKS, DEFAULT_WEEK_STARTS_ON } from '../../lib/constants'
 import { Interval, parseISO } from 'date-fns'
-import {
-  getCalendarEndDate,
-  getCalendarStartDate,
-} from '../../lib/calendarUtils'
+import { getCalendarEndDate, getCalendarStartDate } from '../../lib/calendarUtils'
 import Body from './Body'
 import { DayOfWeek } from '../../lib/DayOfWeek'
 import Header from './Header'
@@ -21,7 +18,7 @@ export interface ICalendarProps {
   defaultDate?: Date
   dayHeaderComponent?: (props: { date: Date }) => JSX.Element
   events?: IEventSource[]
-  eventComponent?: (props: { event: IEvent, showEventTime?: boolean }) => JSX.Element
+  eventComponent?: (props: { event: IEvent; showEventTime?: boolean }) => JSX.Element
   getCalendarDates?: (values: { start: Date; end: Date }) => void
   headerToolbar?: boolean
   loadingComponent?: JSX.Element
@@ -39,19 +36,19 @@ const Calendar: React.FunctionComponent<ICalendarProps> = ({ headerToolbar = tru
   const [activeTab, setActiveTab] = React.useState<number>(0)
   const [numOfWeeks, setNumOfWeeks] = React.useState<number>(DEFAULT_NUMBER_OF_WEEKS)
   const [currentSpan, setCurrentSpan] = useState<Date>(
-    startOfMonth(props.defaultDate ?? new Date())
+    startOfMonth(props.defaultDate || new Date())
   )
 
-  const start = React.useMemo(() => getCalendarStartDate(currentSpan, numOfWeeks, props.weekStartsOn,), [
-    props.weekStartsOn,
+  const start = React.useMemo(
+    () => getCalendarStartDate(currentSpan, numOfWeeks, props.weekStartsOn),
+    [props.weekStartsOn, currentSpan, numOfWeeks]
+  )
+
+  const end = React.useMemo(() => getCalendarEndDate(currentSpan, numOfWeeks, props.weekStartsOn), [
     currentSpan,
-    numOfWeeks
+    numOfWeeks,
+    props.weekStartsOn
   ])
-
-  const end = React.useMemo(
-    () => getCalendarEndDate(currentSpan, numOfWeeks, props.weekStartsOn),
-    [currentSpan, numOfWeeks, props.weekStartsOn]
-  )
 
   const range: Interval | undefined = React.useMemo(() => {
     if (!props.validRange) {
@@ -65,12 +62,20 @@ const Calendar: React.FunctionComponent<ICalendarProps> = ({ headerToolbar = tru
     }
   }, [props.validRange])
 
-  const renderView = React.useCallback((viewComponent: View['component']) => {
-        return viewComponent({ endDate: end, events: props.events, startDate: start, validRange: range })
-      }, [end, start, props.events, range])
+  const renderView = React.useCallback(
+    (viewComponent: View['component']) => {
+      return viewComponent({
+        endDate: end,
+        events: props.events,
+        startDate: start,
+        validRange: range
+      })
+    },
+    [end, start, props.events, range]
+  )
 
   React.useEffect(() => {
-    if(props.weeks && props.weeks > 0 && activeTab === 0) {
+    if (props.weeks && props.weeks > 0 && activeTab === 0) {
       setNumOfWeeks(props.weeks)
     }
   }, [props.weeks])
@@ -83,24 +88,26 @@ const Calendar: React.FunctionComponent<ICalendarProps> = ({ headerToolbar = tru
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <CalendarContainer selectedIndex={activeTab} onSelect={() => {}}>
-        {headerToolbar && <Header
-          activeTab={activeTab}
-          currentSpan={currentSpan}
-          numberOfWeeks={numOfWeeks}
-          setActiveTab={setActiveTab}
-          setCurrentSpan={setCurrentSpan}
-          setNumOfWeeks={setNumOfWeeks}
-          shouldShowTodayButton={props.shouldShowTodayButton}
-          shouldShowDatePicker={props.shouldShowDatePicker}
-          validRange={range}
-          views={props.views}
-        />}
+      <CalendarContainer selectedIndex={activeTab}>
+        {headerToolbar && (
+          <Header
+            activeTab={activeTab}
+            currentSpan={currentSpan}
+            numberOfWeeks={numOfWeeks}
+            setActiveTab={setActiveTab}
+            setCurrentSpan={setCurrentSpan}
+            setNumOfWeeks={setNumOfWeeks}
+            shouldShowTodayButton={props.shouldShowTodayButton}
+            shouldShowDatePicker={props.shouldShowDatePicker}
+            validRange={range}
+            views={props.views}
+          />
+        )}
         <CalendarBodyContainer>
-        {props.loadingComponent}
-        {props.views ? (
-          <>
-            <TabPanel key={0} tabIndex={0}>
+          {props.loadingComponent}
+          {props.views ? (
+            <>
+              <TabPanel key={0} tabIndex={0}>
                 <Body
                   currentSpan={currentSpan}
                   start={start}
@@ -120,22 +127,22 @@ const Calendar: React.FunctionComponent<ICalendarProps> = ({ headerToolbar = tru
                   {renderView(component)}
                 </TabPanel>
               ))}
-          </>
-        ) : (
-          <Body
-            currentSpan={currentSpan}
-            start={start}
-            end={end}
-            events={props.events}
-            numberOfWeeks={numOfWeeks}
-            weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}
-            shouldScrollSync={props.shouldScrollSync}
-            dayHeaderComponent={props.dayHeaderComponent}
-            eventComponent={props.eventComponent}
-            showEventTime={props.showEventTime}
-            validRange={range}
-          />
-        )}
+            </>
+          ) : (
+            <Body
+              currentSpan={currentSpan}
+              start={start}
+              end={end}
+              events={props.events}
+              numberOfWeeks={numOfWeeks}
+              weekStartsOn={props.weekStartsOn || DEFAULT_WEEK_STARTS_ON}
+              shouldScrollSync={props.shouldScrollSync}
+              dayHeaderComponent={props.dayHeaderComponent}
+              eventComponent={props.eventComponent}
+              showEventTime={props.showEventTime}
+              validRange={range}
+            />
+          )}
         </CalendarBodyContainer>
       </CalendarContainer>
     </ThemeProvider>

@@ -1,4 +1,12 @@
-import { Interval, addWeeks, addMonths, format, isSameMonth, isWithinInterval, subWeeks } from 'date-fns'
+import {
+  Interval,
+  addWeeks,
+  addMonths,
+  format,
+  isSameMonth,
+  isWithinInterval,
+  subWeeks
+} from 'date-fns'
 import * as React from 'react'
 import { HeaderContainer, NavContainer, TabIcon, Title } from './Header.styled'
 import { Tab, TabList } from 'react-tabs'
@@ -9,7 +17,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { View } from '../../../lib/view'
 import { throttle } from 'lodash'
 import subMonths from 'date-fns/subMonths'
-import { faCalendarAlt, faStopwatch, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCalendarAlt,
+  faStopwatch,
+  faChevronLeft,
+  faChevronRight
+} from '@fortawesome/free-solid-svg-icons'
 
 interface IHeaderProps {
   activeTab: number
@@ -24,55 +37,73 @@ interface IHeaderProps {
   views?: View[]
 }
 
-const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan, numberOfWeeks, setActiveTab, setCurrentSpan, setNumOfWeeks, shouldShowDatePicker, shouldShowTodayButton, validRange, views }) => {
-  const range = React.useMemo(() => { if(!validRange) { return undefined }; return { start: new Date(validRange.start), end: new Date(validRange.end) } }, [validRange])
+const Header: React.FunctionComponent<IHeaderProps> = ({
+  activeTab,
+  currentSpan,
+  numberOfWeeks,
+  setActiveTab,
+  setCurrentSpan,
+  setNumOfWeeks,
+  shouldShowDatePicker,
+  shouldShowTodayButton,
+  validRange,
+  views
+}) => {
+  const range = React.useMemo(() => {
+    if (!validRange) {
+      return undefined
+    }
+    return { start: new Date(validRange.start), end: new Date(validRange.end) }
+  }, [validRange])
 
   const throttledSetCurrentSpan = throttle(setCurrentSpan, 500)
 
   const navigatePrevspan = React.useMemo(() => {
-    if(numberOfWeeks === 6) {
+    if (numberOfWeeks === 6) {
       return subMonths(currentSpan, 1)
     }
-    
+
     return subWeeks(currentSpan, numberOfWeeks)
-  },[currentSpan, numberOfWeeks])
+  }, [currentSpan, numberOfWeeks])
 
   const navigateNextspan = React.useMemo(() => {
-    if(numberOfWeeks === 6) {
+    if (numberOfWeeks === 6) {
       return addMonths(currentSpan, 1)
     }
 
     return addWeeks(currentSpan, numberOfWeeks)
-  },[currentSpan, numberOfWeeks])
+  }, [currentSpan, numberOfWeeks])
 
   return (
     <HeaderContainer>
-            {views ?
-              <TabList>
-                  <Tab
-                    key={0}
-                    selected={activeTab === 0}
-                    onClick={(): void => {
-                      setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
-                      setTimeout(() => setActiveTab(0), 100)
-                    }}>
-                    <TabIcon icon={faCalendarAlt} />
-                    Standard View
-                  </Tab>
-                {views.map(({ icon, name, weeks }, i) => (
-                  <Tab
-                    key={i + 1}
-                    selected={activeTab === i + 1}
-                    onClick={(): void => {
-                      setNumOfWeeks(weeks ?? DEFAULT_NUMBER_OF_WEEKS)
-                      setTimeout(() => setActiveTab(i + 1), 100)
-                    }}>
-                    {icon && <TabIcon icon={icon} />}
-                    {name}
-                  </Tab>
-                ))}
-              </TabList> : <div />
-            }
+      {views ? (
+        <TabList>
+          <Tab
+            key={0}
+            selected={activeTab === 0}
+            onClick={(): void => {
+              setNumOfWeeks(DEFAULT_NUMBER_OF_WEEKS)
+              setTimeout(() => setActiveTab(0), 100)
+            }}>
+            <TabIcon icon={faCalendarAlt} />
+            Standard View
+          </Tab>
+          {views.map(({ icon, name, weeks }, i) => (
+            <Tab
+              key={i + 1}
+              selected={activeTab === i + 1}
+              onClick={(): void => {
+                setNumOfWeeks(weeks || DEFAULT_NUMBER_OF_WEEKS)
+                setTimeout(() => setActiveTab(i + 1), 100)
+              }}>
+              {icon && <TabIcon icon={icon} />}
+              {name}
+            </Tab>
+          ))}
+        </TabList>
+      ) : (
+        <div />
+      )}
       <Title>{format(currentSpan, 'MMMM yyyy')}</Title>
       <NavContainer>
         {shouldShowTodayButton && (
@@ -95,8 +126,8 @@ const Header: React.FunctionComponent<IHeaderProps> = ({ activeTab, currentSpan,
         {shouldShowDatePicker && (
           <DatePicker
             onChange={(evt) => setCurrentSpan(evt as Date)}
-            minDate={range?.start}
-            maxDate={range?.end}
+            minDate={range ? range.start : null}
+            maxDate={range ? range.end : null}
             showMonthYearPicker
             showYearDropdown
           />

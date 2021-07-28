@@ -3,7 +3,6 @@ import Datepicker, { ReactDatePickerProps } from 'react-datepicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons'
 
-
 const DatePicker: React.FunctionComponent<ReactDatePickerProps> = (props) => {
   return (
     <Datepicker

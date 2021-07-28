@@ -1,4 +1,4 @@
-export function throttle(fn: (args: any) => any, wait: number = 300) {
+export function throttle(fn: (args: any) => any, wait = 300) {
   let inThrottle: boolean, lastFn: ReturnType<typeof setTimeout>, lastTime: number
   return function(args: any) {
     if (!inThrottle) {
