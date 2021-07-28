@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import Datepicker, { ReactDatePickerProps } from 'react-datepicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarDay } from '@fortawesome/free-solid-svg-icons'

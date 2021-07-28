@@ -1,6 +1,6 @@
 import cn from 'classnames'
 import { isSameMonth, isToday } from 'date-fns'
-import * as React from 'react'
+import React from 'react'
 import { DayContainer, DayHeader, EventsContainer } from './Day.styled'
 import Event from '../Event'
 import { IEvent } from '../../../lib/event'

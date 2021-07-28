@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { IEvent } from '../../../lib/event'
 import {
   StyledColorTag,

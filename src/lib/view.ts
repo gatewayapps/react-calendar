@@ -1,4 +1,4 @@
-import { IEventSource } from '../../dist/lib/eventSource'
+import { IEventSource } from '../lib/eventSource'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types'
 import { Interval } from 'date-fns'
 

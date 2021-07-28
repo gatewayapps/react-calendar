@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { BodyContainer, WeekdayHeader } from './Body.styled'
 import { Interval, eachDayOfInterval, format, isWithinInterval } from 'date-fns'
 import Day from '../Day'
@@ -31,7 +31,7 @@ const Body: React.FunctionComponent<IBodyProps> = ({ start, end, ...props }) => 
 
     const { start, end } = props.validRange
     return allDays.every((day) => isWithinInterval(day, { start, end }))
-  }, [])
+  }, [allDays, props.validRange])
 
   if (!daysWithinValidRange) {
     return null

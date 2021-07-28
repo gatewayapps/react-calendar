@@ -7,7 +7,7 @@ import {
   isWithinInterval,
   subWeeks
 } from 'date-fns'
-import * as React from 'react'
+import React from 'react'
 import { HeaderContainer, NavContainer, TabIcon, Title } from './Header.styled'
 import { Tab, TabList } from 'react-tabs'
 

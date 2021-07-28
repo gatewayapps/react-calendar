@@ -32,7 +32,11 @@ export interface ICalendarProps {
   weekStartsOn?: DayOfWeek
 }
 
-const Calendar: React.FunctionComponent<ICalendarProps> = ({ headerToolbar = true, ...props }) => {
+const Calendar: React.FunctionComponent<ICalendarProps> = ({
+  headerToolbar = true,
+  getCalendarDates,
+  ...props
+}) => {
   const [activeTab, setActiveTab] = React.useState<number>(0)
   const [numOfWeeks, setNumOfWeeks] = React.useState<number>(DEFAULT_NUMBER_OF_WEEKS)
   const [currentSpan, setCurrentSpan] = useState<Date>(
@@ -78,13 +82,13 @@ const Calendar: React.FunctionComponent<ICalendarProps> = ({ headerToolbar = tru
     if (props.weeks && props.weeks > 0 && activeTab === 0) {
       setNumOfWeeks(props.weeks)
     }
-  }, [props.weeks])
+  }, [activeTab, props.weeks])
 
   React.useEffect(() => {
-    if (props.getCalendarDates) {
-      props.getCalendarDates({ end, start })
+    if (getCalendarDates) {
+      getCalendarDates({ end, start })
     }
-  }, [props.getCalendarDates, start, end])
+  }, [getCalendarDates, start, end])
 
   return (
     <ThemeProvider theme={defaultTheme}>
