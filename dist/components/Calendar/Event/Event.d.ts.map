@@ -1,1 +1,0 @@
-{"version":3,"file":"Event.d.ts","sourceRoot":"","sources":["../../../../src/components/Calendar/Event/Event.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,KAAK,MAAM,OAAO,CAAA;AAC9B,OAAO,EAAE,MAAM,EAAE,MAAM,oBAAoB,CAAA;AAS3C,UAAU,WAAY,SAAQ,MAAM;IAClC,aAAa,CAAC,EAAE,OAAO,CAAA;CACxB;AAED,QAAA,MAAM,KAAK,EAAE,KAAK,CAAC,iBAAiB,CAAC,WAAW,CAoB/C,CAAA;AAED,eAAe,KAAK,CAAA"}
