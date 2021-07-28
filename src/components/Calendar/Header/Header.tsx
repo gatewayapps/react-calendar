@@ -2,13 +2,14 @@ import { Interval, addWeeks, addMonths, format, isSameMonth, isWithinInterval, s
 import * as React from 'react'
 import { HeaderContainer, NavContainer, TabIcon, Title } from './Header.styled'
 import { Tab, TabList } from 'react-tabs'
-import { faCalendarAlt, faChevronLeft, faChevronRight, faStopwatch } from '@fortawesome/pro-solid-svg-icons'
+
 import { DEFAULT_NUMBER_OF_WEEKS } from '../../../lib/constants'
 import DatePicker from '../DatePicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { View } from '../../../lib/view'
 import { throttle } from 'lodash'
 import subMonths from 'date-fns/subMonths'
+import { faCalendarAlt, faStopwatch, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 interface IHeaderProps {
   activeTab: number

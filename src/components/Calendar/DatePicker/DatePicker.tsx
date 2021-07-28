@@ -1,7 +1,8 @@
 import * as React from 'react'
 import Datepicker, { ReactDatePickerProps } from 'react-datepicker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarEdit } from '@fortawesome/pro-solid-svg-icons'
+import { faCalendarDay } from '@fortawesome/free-solid-svg-icons'
+
 
 const DatePicker: React.FunctionComponent<ReactDatePickerProps> = (props) => {
   return (
@@ -10,7 +11,7 @@ const DatePicker: React.FunctionComponent<ReactDatePickerProps> = (props) => {
       popperPlacement="bottom-end"
       customInput={
         <button className="nav-button" style={{ margin: '0px 5px' }}>
-          <FontAwesomeIcon icon={faCalendarEdit} />
+          <FontAwesomeIcon icon={faCalendarDay} />
           <span>Select Date</span>
         </button>
       }
