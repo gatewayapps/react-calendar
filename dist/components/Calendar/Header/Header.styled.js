@@ -10,7 +10,6 @@ exports.HeaderContainer = styled_components_1.default.div `
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 0.5em;
 `;
 exports.NavContainer = styled_components_1.default.div `
   display: flex;

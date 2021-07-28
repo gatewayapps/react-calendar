@@ -5,7 +5,6 @@ export const HeaderContainer = styled.div`
   align-items: center;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  padding: 0.5em;
 `
 
 export const NavContainer = styled.div`

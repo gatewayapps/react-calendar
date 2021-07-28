@@ -19,7 +19,7 @@ exports.WeekdayHeader = styled_components_1.default.div `
   font-weight: bold;
   justify-content: center;
   text-align: center;
-  padding: 0.571em 1em;
+  padding: 0 1em;
   grid-row: ${(props) => props.row};
   grid-column: ${(props) => props.column};
 `;

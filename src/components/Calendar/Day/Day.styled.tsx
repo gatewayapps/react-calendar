@@ -15,7 +15,7 @@ export const DayHeader = styled.div`
   font-size: 0.75em;
   font-weight: bold;
   overflow: hidden;
-  padding: 5px;
+  padding: 3px 3px 0px 3px;
 `
 
 export const DayContainer = styled.div<IDayContainerProps>`

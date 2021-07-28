@@ -13,7 +13,7 @@ exports.DayHeader = styled_components_1.default.div `
   font-size: 0.75em;
   font-weight: bold;
   overflow: hidden;
-  padding: 5px;
+  padding: 3px 3px 0px 3px;
 `;
 exports.DayContainer = styled_components_1.default.div `
   background: ${(props) => {
