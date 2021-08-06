@@ -7,6 +7,17 @@ export interface IDayContainerProps {
   column: number
 }
 
+export const DayHeader = styled.div`
+  align-items: center;
+  background-color: inherit;
+  color: ${(props) => props.theme.calendarDay.headerColor};
+  display: flex;
+  font-size: 0.75em;
+  font-weight: bold;
+  overflow: hidden;
+  padding: 3px 3px 0px 3px;
+`
+
 export const DayContainer = styled.div<IDayContainerProps>`
   background: ${(props) => {
     if (!props.isCurrentMonth) {
@@ -24,9 +35,23 @@ export const DayContainer = styled.div<IDayContainerProps>`
   overflow-y: hidden;
   grid-row: ${(props) => props.row};
   grid-column: ${(props) => props.column};
-  /* IE 11 Support */
-  -ms-grid-row: ${(props) => props.row};
-  -ms-grid-column: ${(props) => props.column};
+
+  ${DayHeader} {
+    border-top: ${(props) => {
+      if (props.isToday) {
+        return `5px solid ${props.theme.calendarDay.todayBorderColor}`
+      } else {
+        return 'unset'
+      }
+    }};
+    padding-bottom: ${(props) => {
+      if (props.isToday) {
+        return '0px'
+      } else {
+        return '5px'
+      }
+    }};
+  }
 
   &:not(.firstDayOfWeek) {
     border-left-width: 0.5px;
@@ -37,15 +62,14 @@ export const DayContainer = styled.div<IDayContainerProps>`
   }
 `
 
-export const DayHeader = styled.div`
-  background-color: #eee;
-  border-bottom: 1px solid ${(props) => props.theme.calendarDay.borderColor};
-  font-size: 0.85em;
-  font-weight: bold;
-  padding: 0 0.5em;
-`
-
-export const EventsContainer = styled.div`
+export const EventsContainer = styled.div.attrs({
+  className: 'events-container'
+})`
   flex: 1;
-  overflow-y: auto;
+  max-height: 115px;
+  overflow-y: hidden;
+
+  &:hover {
+    overflow-y: auto;
+  }
 `

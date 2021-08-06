@@ -20,7 +20,6 @@
   "[handlebars]": {
     "editor.formatOnSave": false
   },
-  "prettier.tslintIntegration": true,
   "files.insertFinalNewline": true,
   "files.exclude": {
     "**/.git": true,
@@ -29,6 +28,6 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "node_modules": true,
-    "dist": true
+    "dist": false
   }
 }
